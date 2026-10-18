@@ -1,6 +1,6 @@
-# Find My Word
+# HiddenWord
 
-Find My Word est un projet que j'ai commencé à partir d'un projet tutoré réalisé pendant ma deuxième année de BUT.
+HiddenWord est un projet que j'ai commencé à partir d'un projet tutoré réalisé pendant ma première année de BUT.
 
 À l'origine, le but du projet était de créer en Java un jeu inspiré de **Wordle**, jouable directement depuis le terminal.
 
@@ -8,7 +8,7 @@ Après avoir terminé le projet demandé, j'ai eu envie de continuer à travaill
 
 Pour réussir à faire communiquer mon interface avec mon programme Java, j'ai également commencé à apprendre **Spring Boot en autodidacte**.
 
-Ce projet est encore en cours d'amélioration et j'essaie régulièrement de corriger des bugs, d'améliorer le design et d'ajouter de nouvelles fonctionnalités.
+Ce projet est encore en cours d'amélioration et j'essaie régulièrement de corriger des bugs, d'améliorer le design et d'ajouter de nouvelles fonctionnalités (donc soyez indulgent svp).
 
 ---
 
@@ -32,7 +32,7 @@ Aujourd'hui le projet fonctionne directement depuis le navigateur avec le front-
 
 ## Fonctionnalités
 
-Pour le moment, Find My Word contient notamment :
+Pour le moment, Mon jeu contient notamment :
 
 - Un mode **Solo**
 - Un mode **Duo**
@@ -87,7 +87,7 @@ Le projet a déjà eu plusieurs versions avant d'arriver à celle-ci.
 
 ## Le logo
 
-Le logo de Find My Word a d'abord été imaginé et dessiné par mes soins sur papier.
+Le logo de Find My Word a d'abord été imaginé et dessiné par moi même sur papier.
 
 Je voulais créer quelque chose autour des lettres du projet avec une forme assez particulière et reconnaissable.
 
@@ -101,9 +101,9 @@ Exemple :
 ![Premier dessin du logo](images/logo-original.jpg)
 -->
 
-J'ai ensuite utilisé l'intelligence artificielle afin de reproduire mon dessin sous une forme numérique plus propre tout en essayant de conserver au maximum l'idée de départ.
+J'ai ensuite utilisé l'intelligence artificielle afin de reproduire mon dessin sous une forme numérique plus propre tout en essayant de conserver au maximum l'idée de départ (tout en respectant le code couleur).
 
-La version obtenue est ensuite devenue le logo utilisé sur le site.
+La version obtenue est ensuite devenue le logo utilisé sur le site (page Duo).
 
 <!-- Si ton Logo.png est bien dans le dossier front end : -->
 
@@ -184,7 +184,7 @@ Le projet n'est pas terminé et j'ai encore plusieurs idées pour la suite.
 
 J'aimerais notamment :
 
-- Continuer à améliorer le design
+- Continuer à améliorer le design (tout en mettant en avant des références que j'aime)
 - Améliorer certaines animations
 - Corriger les bugs que je peux encore trouver
 - Rendre le site plus adapté aux différentes tailles d'écran
