@@ -1,5 +1,5 @@
 package com.loic.hiddenword.Repo;
-import com.loic.hiddenword.données.Word;
+import com.loic.hiddenword.donnees.Word;
 
 public class FixedWordRepository extends WordRepository {
 

@@ -1,4 +1,4 @@
-package com.loic.hiddenword.données;;
+package com.loic.hiddenword.donnees;
 public class Word {
 
 /* L' attribut */

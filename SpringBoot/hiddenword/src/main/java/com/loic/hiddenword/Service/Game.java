@@ -1,9 +1,9 @@
 package com.loic.hiddenword.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.loic.hiddenword.données.Joueur;
+import com.loic.hiddenword.donnees.Joueur;
 import com.loic.hiddenword.Repo.WordRepository;
-import com.loic.hiddenword.données.Word;
+import com.loic.hiddenword.donnees.Word;
 @Service
 public class Game {
 

@@ -1,7 +1,7 @@
 package com.loic.hiddenword.Repo;
 import org.springframework.stereotype.Repository;
 
-import com.loic.hiddenword.données.Word;
+import com.loic.hiddenword.donnees.Word;
 import words.WordSet;
 import words.JsonWordSet;
 @Repository

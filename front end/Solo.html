@@ -105,7 +105,15 @@
 </audio>
 </body>
 <script>
-    
+    let API_URL;
+    if (
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1"
+    ) {
+        API_URL = "http://localhost:8080";
+    } else {
+        API_URL = "https://TON-BACKEND.up.railway.app";
+    }
     let apparitions= document.getElementById("apparition");
 
     setTimeout(()=>{
@@ -528,7 +536,7 @@
             body: JSON.stringify({Nom:Joueur, NombreDeTour:String(tours)})
         };
 
-        let reponse= await fetch("http://localhost:8080/api/renseignement", options);
+        let reponse= await fetch(API_URL +"/renseignement", options);
         let resultat = await reponse.json();
     }
         async function EnvoipourVainqueur(mot){
@@ -540,7 +548,7 @@
             body: JSON.stringify({essai:mot})
         };
 
-        let reponse= await fetch("http://localhost:8080/api/vainqueur", options);
+        let reponse= await fetch(API_URL +"/vainqueur", options);
         let resultat = await reponse.json();
         return resultat;
     }
@@ -553,7 +561,7 @@
             body: JSON.stringify({essai:mot})
         };
 
-        let reponse= await fetch("http://localhost:8080/api/verifier", options);
+        let reponse= await fetch(API_URL +"/verifier", options);
         let resultat = await reponse.json();
         placement(resultat, nbrligne);
     }
@@ -566,7 +574,7 @@
             },
         };
 
-        let reponse= await fetch("http://localhost:8080/api/score", options);
+        let reponse= await fetch(API_URL +"/score", options);
         let resultat = await reponse.json();
         return resultat;
     }
