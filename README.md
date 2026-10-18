@@ -61,13 +61,9 @@ Je trouvais le concept intéressant et j'ai donc essayé de m'en inspirer pour c
 
 L'objectif n'était pas de reproduire exactement l'interface de Solo Leveling mais plutôt de reprendre l'idée générale et son ambiance.
 
-<!--
-Tu peux mettre ici ton image d'inspiration Solo Leveling.
-
-Exemple :
-
-![Inspiration du système Solo Leveling](chemin/vers/image.png)
--->
+<p align="center">
+  <img src="images/systeme%20sololeveling.png" width="500" alt="Système Solo Leveling">
+</p>
 
 ---
 
@@ -93,19 +89,17 @@ Je voulais créer quelque chose autour des lettres du projet avec une forme asse
 
 Voici le dessin original que j'avais réalisé :
 
-<!--
-Ajoute ici la photo de ton dessin original.
-
-Exemple :
-
-![Premier dessin du logo](images/logo-original.jpg)
--->
+<p align="center">
+  <img src="images/Logo%20depart.jpg" width="350" alt="Premier dessin du logo Find My Word">
+</p>
 
 J'ai ensuite utilisé l'intelligence artificielle afin de reproduire mon dessin sous une forme numérique plus propre tout en essayant de conserver au maximum l'idée de départ (tout en respectant le code couleur).
 
 La version obtenue est ensuite devenue le logo utilisé sur le site (page Duo).
 
-<!-- Si ton Logo.png est bien dans le dossier front end : -->
+<p align="center">
+  <img src="images/Logo%20fin.jpg" width="350" alt="Logo final Find My Word">
+</p>
 
 <img src="front%20end/Logo.png" alt="Logo Find My Word" width="250">
 
