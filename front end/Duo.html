@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Mode Duo </title>
+<link rel="stylesheet" href="Duo.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Elsie:wght@400;900&family=Sekuya&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+        
+        
+        <div>
+        <span id="BackgroundAnimation"></span>
+        <span id="BarredeProgression"></span>
+        <span id="rectangleJoueur"> </span>
+        <img id="Logo" src="Logo.png" alt="Mon Logo" />
+        </div>
+        <div id="J1"> Joueur 1</div>
+        <div id="J2"> Joueur 2</div>
+        <div id="apparition">
+        <h1 id="Titre"> Bienvenue dans le mode DUO</h1>
+        <table class="jeu">
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </table>
+                <div class="renseignement">
+                        <div class="question">
+                        <label for="nom">Quel est le nom du premier Joueur ?</label>
+                        <!-- ATTTention nom est devenu nomJoueur1-->
+                        <input type="text" id="nomJoueur1"  name="nomJoueur1" /></div>
+                        <br>
+                        <div class="question">
+                        <label for="nom">Quel est le nom du deuxième Joueur ?</label>
+                        <!-- ATTTention nom est devenu nomJoueur1-->
+                        <input type="text" id="nomJoueur2"  name="nomJoueur2" /></div>
+                        <br>
+                        <div class="question">
+                        <label for="tours">Combien de tours veux tu jouer (max 3) ?</label>
+                        <input type="number" id="tours" name="tours" min="1" max="3" /></div>
+                        <button class="fait" type="button"> C'est fait</button>
+                </div>
+
+<div class="regles jeu"><p>Les Règles du jeu FindMyWord en Duo sont simples,<br>
+
+        Mon programme choisit un mot secret de 5 lettres que vous devez deviner.<br>
+        On considère qu’une lettre apparaît au maximum une seule fois dans le mot.<br>
+        En mode Duo, vous jouez chacun votre tour pour tenter de marquer le plus de points !<br>
+
+        À chaque essai, le joueur actif doit proposer un mot.<br>
+        Mon programme va alors analyser cette proposition et indiquer, pour chaque lettre :
+        <ul>
+                <li>si elle est correcte et bien placée (<span style="color:rgb(123, 190, 35)"> Vert </span>),</li>
+                <li>si elle est présente dans le mot mais mal placée (<span style="color:#ffef16"> Jaune </span>),</li>
+                <li>si elle est absente du mot (<span style="color:rgb(185, 81, 81)"> Rouge </span>).</li>
+        </ul>
+
+        Si t'as toujours pas capté,<br>
+
+        Vous jouez à tour de rôle, et chaque mot secret contient exactement 5 lettres sans aucune lettre répétée.</p>
+        <button class="compris" type="button"> C'est compris</button>
+</div>
+        
+        </div>
+        <div class="score jeu"> Votre score est : <span class="spanscore1"></span></div>
+        <button class="continuer" type="button"> Continuer</button>
+        <div class="mes_infos jeu">
+                <p id="mon_nom"> Réalisé par Loïc LAKSHMINARAYANAN</p>
+                <p id="info" > i</p>
+        </div>
+<div class="overlay jeu"></div>
+<div class="motdefin jeu">
+        <div class="entete">
+        <img src="info.png" alt="information"/>
+        <div class="centre quete"> INFO QUÊTE</div></div>
+        <hr>
+        <p class="centre resultat"> RÉSULTATS</p>
+        <div class="stats">
+        <div>
+        <p> Vainqueur</p>
+        <p> [<span class="vainqueur"></span>]</p></div>
+        <div>
+        <p> Nombre Round</p>
+        <p> [<span class="spantours"></span> /<span class="spantours"></span>]</p></div>
+        <div>
+        <p> Score</p>
+        <p> [<span class="spanscore"></span>]</p></div>
+        <div>
+        <p> Temps écoulé</p>
+        <p> [<span class="temps"></span>]</p></div>
+        </div>
+                <hr>
+        <p class="warning"> </p>
+
+        <button class="Recommencer" type="button">
+                <span class="bloc"></span>
+                <span class="txt">Recommencer</span>
+        </button>
+        <a href="Wordle.html">
+        <img id="menu" src="home.png" alt="menu" /></a>
+
+
+</div>
+
+</div>
+
+<div class="regleMot" id="longueur"> Le mot doit faire 5 lettres</div>
+<div class="regleMot" id="repetition"> le mot ne doit pas contenir de lettre répétée</div>
+        <audio muted>
+        <source src="audio_tour.m4a" >
+</audio>
+</body>
+<script>
+        
+        let apparitions= document.getElementById("apparition");
+
+        setTimeout(()=>{
+                for(let i=0; i < apparitions.children.length; i++){
+                if (!apparitions.children[i].classList.contains("jeu")) {
+                        setTimeout(()=>{
+                        apparitions.children[i].style.opacity=1;}, 500*i);}
+                }
+        }, 9200);
+
+
+        let renseignement=document.querySelector(".renseignement");
+        let boutonfait=document.querySelector(".fait");
+        let Joueur1="J1";
+        let Joueur2="J2";
+        let tours="1"
+        let audioTour=document.querySelector("audio");
+        let audio_joue=false;
+        let Unround=false;
+        let Deuxround=false;
+        let Troisround=false;
+        let SpanTours=document.querySelectorAll(".spantours");
+        let motdefin=document.querySelector(".motdefin");
+        let boutonRecommencer= document.querySelector(".Recommencer");
+        let overlay= document.querySelector(".overlay");
+        let debut;
+        let td=document.querySelectorAll('td');
+        let BloquerMottaper=false;
+        let colonneActu=0;
+        let nbrligne=0;
+        let scoreJ1 =0;
+        let scoreJ2 =0;
+        let motJoueur="";
+        let controller = new AbortController();
+        let { signal } = controller;
+        let divj1= document.getElementById("J1");
+        let divj2= document.getElementById("J2");
+        let rectangleJoueur=document.getElementById("rectangleJoueur");
+        let body=document.querySelector("body");
+        let Titre=document.getElementById("Titre");
+        let divScore= document.querySelector(".score");
+        let boutonInfo = document.getElementById("info");
+        let SpanScore=document.querySelector(".spanscore");
+        let afficheScore=document.querySelector(".spanscore1");
+
+        boutonfait.addEventListener("click", ()=>{
+                renseignement.style.opacity = 0;
+                setTimeout(() => {
+                renseignement.style.display = "none";
+                }, 250);
+                Joueur1=document.getElementById("nomJoueur1").value;
+                Joueur2=document.getElementById("nomJoueur2").value;
+                tours=document.getElementById("tours").value;
+                if(tours==""){
+                tours="1";
+                }
+                if(Joueur1==""){
+                Joueur1="Player 1"
+                }
+                if(Joueur2==""){
+                Joueur2="Player 2"
+                }
+                if(tours==="1"){
+                Unround=true;
+                }
+                else if(tours==="2"){
+                Deuxround=true;
+                }
+                else{
+                Troisround=true;
+                }
+                SpanTours.forEach(span=>{
+                        span.textContent=tours;
+                });
+                setTimeout(()=>{
+                divj1.style.opacity=1;
+                divj2.style.opacity=1;
+                rectangleJoueur.style.width = "50%";
+                rectangleJoueur.style.animation = "none";
+        }, 1000);
+
+                setTimeout(()=>{
+                divj1.style.opacity=0;
+                divj2.style.opacity=0;
+                rectangleJoueur.style.transition = "ease-in-out 3s";
+                rectangleJoueur.style.width="100%";
+        }, 3000);
+        setTimeout(()=>{
+                body.style.color="#FFF5DB";
+                Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
+                divScore.style.color="#FFF5DB";
+                boutonInfo.style.background="#FFF5DB";
+                boutonInfo.style.border="1px solid #FFF5DB";
+                boutonInfo.style.color="#2E1D1D";
+                afficheScore.textContent=scoreJ1;
+                td.forEach(td=>{
+                        td.style.border="3px solid #FFF5DB"
+                })
+        }, 3000);
+                boutonInfo.addEventListener("mouseenter", sourisBoutonInfoEntrer, { signal });
+                boutonInfo.addEventListener("mouseleave", sourisBoutonInfoSortie, { signal });
+
+                setTimeout(()=>{
+                audioTour.muted = false;
+                audioTour.play();
+                lancerPartie();
+                envoiMutiRenseignement(Joueur1, Joueur2, tours);
+                debut = performance.now();
+                tours=tours*2;}, 5000);
+                
+        });
+
+        boutonRecommencer.addEventListener("click", async ()=>{
+                await reset();
+                motdefin.style.opacity = 0;
+                overlay.style.opacity = 0;
+                setTimeout(() => {
+                motdefin.style.display = "none";
+                overlay.style.display = "none";
+
+                }, 250);
+                td.forEach(td => {
+                td.textContent = "";
+                td.style.backgroundColor = "";
+                });
+                
+                if (Unround){
+                tours=1;
+                }
+                else if(Deuxround){
+                tours=2;
+                }
+
+                else {
+                tours=3;
+                }
+                
+                colonneActu=0;
+                nbrligne=0;
+                scoreJ1 =0;
+                scoreJ2 =0;
+                motJoueur="";
+                setTimeout(()=>{
+                divj1.style.opacity=0;
+                divj2.style.opacity=0;
+                rectangleJoueur.style.transition = "ease-in-out 3s";
+                rectangleJoueur.style.width="100%";
+                }, 1000);
+                setTimeout(()=>{
+                body.style.color="#FFF5DB";
+                Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
+                divScore.style.color="#FFF5DB";
+                afficheScore.textContent=scoreJ1;
+                boutonInfo.style.background="#FFF5DB";
+                boutonInfo.style.border="1px solid #FFF5DB";
+                boutonInfo.style.color="#2E1D1D";
+                td.forEach(td=>{
+                        td.style.border="3px solid #FFF5DB"
+                })
+                BloquerMottaper=false;
+                }, 2000);
+                
+                controller.abort();
+                controller = new AbortController();
+                signal = controller.signal
+                boutonInfo.addEventListener("mouseenter", sourisBoutonInfoEntrer, { signal });
+                boutonInfo.addEventListener("mouseleave", sourisBoutonInfoSortie, { signal });
+                
+                lancerPartie();
+                envoiMutiRenseignement(Joueur1, Joueur2, tours);
+                tours=tours*2;
+                debut = performance.now();
+        });
+
+        function lancerPartie(){
+        
+        let jeu= document.querySelectorAll(".jeu");
+
+        setTimeout(()=>{
+                for(let i=0; i < jeu.length; i++){
+                
+                        setTimeout(()=>{
+                        jeu[i].style.opacity=1;}, 100*i);}
+        }, 1000);
+
+        let reglement=document.querySelector(".regles");
+        let boutonCompris=document.querySelector(".compris");
+
+        boutonInfo.addEventListener("click", ()=>{
+
+                reglement.style.display = "block";
+                overlay.style.display = "block";
+                setTimeout(() => {
+                reglement.style.opacity = 1;
+                overlay.style.opacity = 1;
+                }, 20);
+        }, { signal });
+
+
+        boutonCompris.addEventListener("click", ()=>{
+                reglement.style.opacity = 0;
+                overlay.style.opacity = 0;
+
+                setTimeout(() => {
+                reglement.style.display = "none";
+                overlay.style.display = "none";
+
+                }, 250);
+                
+        }, { signal });
+        
+        audioTour.addEventListener("canplaythrough", (event) => {
+        audioTour.play();}, { signal });
+        audioTour.addEventListener("timeupdate", (event) => {
+        if(Troisround){
+                if(tours%2==0){
+                if(audioTour.currentTime >= 3 && audioTour.currentTime < 5 && !audio_joue){
+                audioTour.pause();
+                }
+
+                if(audioTour.currentTime>=8 && audioTour.currentTime < 9){
+                audioTour.pause();
+                audio_joue=false;
+                }
+
+                if(audioTour.currentTime>=13 && audioTour.currentTime < 14){
+                audioTour.pause();
+                audio_joue=false;
+                }}
+        }
+
+        else if (Deuxround) {
+                if(tours%2==0){
+                if(audioTour.currentTime >= 3 && audioTour.currentTime < 5 && !audio_joue){
+                audioTour.pause();
+                }
+
+                if(audioTour.currentTime>=13  && audioTour.currentTime < 14){
+                audioTour.pause();
+                audio_joue=false;
+                }}
+        }
+
+        else if (Unround){
+                if(audioTour.currentTime >= 3 && audioTour.currentTime < 5 && !audio_joue){
+                audioTour.pause();
+                }
+        }
+        }, { signal });
+
+
+
+
+        let longueur=document.getElementById("longueur");
+        let repetition=document.getElementById("repetition");
+        let testRepetition= true;
+        let TableauMotJoueur;
+        let boutonContinuer=document.querySelector(".continuer");
+        let temps;
+        let fin;
+        let secondes;
+        let minutes;
+        let heures;
+        
+        boutonContinuer.addEventListener("click", () => {
+                
+                td.forEach(td => {
+                        td.textContent = "";
+                        td.style.backgroundColor = "";
+                });
+                nbrligne = 0;
+                
+                
+                boutonContinuer.style.opacity = "0";
+                setTimeout(() => {
+                        boutonContinuer.style.display = "none";
+                }, 300);
+                        
+
+                if(Troisround){
+                if (tours/2===2 && audio_joue===false ){
+                
+                setTimeout(() =>{
+                        audioTour.currentTime=5;
+                        audioTour.play()}, 2000);
+                audio_joue=true;
+                }
+                if (tours/2===1 && audio_joue===false ){
+                
+                setTimeout(() => {
+                        audioTour.currentTime=10;
+                        audioTour.play()}, 2000);
+                audio_joue=true;
+                }}
+
+                if(Deuxround){
+                if (tours/2===1 && audio_joue===false ){
+
+                        setTimeout(() =>{
+                                audioTour.currentTime=10;
+                                audioTour.play()}, 2000);
+                        audio_joue=true;
+                }
+                }
+
+                if(tours%2==0){
+                        
+                        rectangleJoueur.style.width="100%";
+                        setTimeout(() => {
+                        body.style.color="#FFF5DB";
+                        Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
+                        divScore.style.color="#FFF5DB";
+                        boutonInfo.addEventListener("mouseenter", sourisBoutonInfoEntrer, { signal });
+                        boutonInfo.addEventListener("mouseleave", sourisBoutonInfoSortie, { signal });
+                        boutonInfo.style.background="#FFF5DB";
+                        boutonInfo.style.border="1px solid #FFF5DB";
+                        boutonInfo.style.color="#2E1D1D";
+                        afficheScore.textContent=scoreJ1;
+
+                        td.forEach(td=>{
+                        td.style.border="3px solid #FFF5DB"
+                        })
+                        BloquerMottaper=false
+                },3000);
+
+                }
+
+                else{
+                        rectangleJoueur.style.transition = "ease-in-out 3s";
+                        rectangleJoueur.style.width="0%";
+                        setTimeout(() => {
+                        body.style.transition = "ease-in-out color 0.5s";
+                        body.style.color="#2E1D1D";
+                        Titre.style.transition = "ease-in-out all 0.5s";
+                        Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 0%, #2E1D1D 0%)";
+                        divScore.style.color="#2E1D1D";
+                        divScore.style.transition = "ease-in-out all 0.5s";
+                        boutonInfo.style.background="#2E1D1D";
+                        boutonInfo.style.border="1px solid #2E1D1D";
+                        boutonInfo.style.color="#FFF5DB";
+                        boutonInfo.addEventListener("mouseenter", ()=>{boutonInfo.style.textShadow="0 0 1px white, 0 0 2px #ffdC96, 0 0 4px #ffdC96, 0 0 8px #ffdC96";}, { signal });
+                        boutonInfo.addEventListener("mouseleave", ()=>{boutonInfo.style.textShadow="none";}, { signal });
+                        afficheScore.textContent=scoreJ2;
+                        td.forEach(td=>{
+                        td.style.transition = "ease-in-out border 0.5s"
+                        td.style.border="3px solid #2E1D1D"
+                        })
+                        BloquerMottaper=false
+                        },3000);
+
+                }
+                
+
+
+                }, { signal });
+
+
+        window.addEventListener('keyup', async (event)=>{
+                if(/^[a-zA-Z]$/.test(event.key) && tours!=0 && !BloquerMottaper){
+                for(let i=0; i < 5;i++){
+                testRepetition=true;
+                longueur.style.opacity=0;
+                if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
+                        td[i+nbrligne*5].textContent=event.key.toUpperCase();
+                        colonneActu ++;
+                        motJoueur+=event.key;
+                        console.log(colonneActu);
+                        break;
+                }
+                }
+
+                TableauMotJoueur=motJoueur.split("");
+                console.log(TableauMotJoueur);
+                for (let lettre=0; lettre<TableauMotJoueur.length; lettre++){
+                for (let autrelettre=1;autrelettre<TableauMotJoueur.length; autrelettre++ ){
+                if(TableauMotJoueur[lettre]===TableauMotJoueur[autrelettre] && lettre!=autrelettre){
+                        testRepetition=false;
+                        break ;
+                }
+                }
+
+                }
+
+        }
+
+
+                else if (event.key==="Enter"  && tours!=0 && !BloquerMottaper){
+                if(colonneActu<5){
+                        longueur.style.opacity=1;
+                        td[nbrligne*5].parentNode.style.left="-20px";
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="20px";}, 100);
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="0px";;}, 200);
+
+                }
+                
+                else if (testRepetition==false){
+                        repetition.style.opacity=1;
+                        td[nbrligne*5].parentNode.style.left="-20px";
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="20px";}, 100);
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="0px";;}, 200);
+                }
+                else{
+                        longueur.style.opacity=0;
+                        repetition.style.opacity=0;
+                        colonneActu=0;
+                        console.log(motJoueur);
+                        BloquerMottaper=true;
+                        let vainqueur= await EnvoipourVainqueur(motJoueur);
+                        await envoiEssai(motJoueur, nbrligne);
+                        nbrligne+=1;
+                        motJoueur="";
+
+                        if(nbrligne==6 || vainqueur ){
+                        BloquerMottaper=true;
+                        if(tours!=1){
+                        boutonContinuer.style.display="block";
+                        
+                        }
+                        if(vainqueur){
+                        if (tours%2==0 ){
+                                scoreJ1= await RecevoirScoreJoueur1();
+                                afficheScore.textContent=scoreJ1;
+                        
+                        }
+                        else {
+                                scoreJ2= await RecevoirScoreJoueur2();
+                                afficheScore.textContent=scoreJ2;
+                        }
+                        }
+
+                        SpanScore.textContent=Joueur1 + " : " + scoreJ1 + " | " + Joueur2 + " : " +scoreJ2;
+
+
+                        if(tours==1){
+                        fin=performance.now();
+                        temps= fin- debut;
+                        secondes= Math.floor((temps/1000)%60);
+                        minutes= Math.floor((temps/60000)%60);
+                        heures= Math.floor(temps/3600000);
+                        document.querySelector(".temps").textContent= heures +"h " +minutes +"min " + secondes +"s";
+                        document.querySelector("table").style.opacity="0";
+                        divScore.style.opacity="0";
+
+                        
+                        if(scoreJ1 > scoreJ2){
+
+                                document.querySelector(".vainqueur").textContent=Joueur1;
+                                document.querySelector(".warning").textContent= Joueur1 + " t'as éteint " + Joueur2;
+                        }
+                        else if (scoreJ1==scoreJ2){
+
+                                document.querySelector(".vainqueur").textContent="égalité";
+                                document.querySelector(".warning").textContent= Joueur1 + " et " + Joueur2 + ", vous avez le même niveau";
+                        }
+                        else{
+
+                                document.querySelector(".vainqueur").textContent=Joueur2;
+                                document.querySelector(".warning").textContent= Joueur2 + " t'as éteint " + Joueur1;
+
+                        }
+                        
+                        overlay.style.display = "block";
+                        motdefin.style.display="block";
+                        
+                        setTimeout(()=>{
+                        overlay.style.opacity = "1";
+                        motdefin.style.opacity="1";
+                        }, 2000);
+                        }
+                        else{
+                        setTimeout(() => boutonContinuer.style.opacity="1", 1000);}
+                        tours-=1;
+                        vainqueur=false;
+                        
+                        }
+                        else {
+                                BloquerMottaper=false;
+                        }
+
+                }
+                return ;
+                }
+                if(event.key==="Backspace"  && tours!=0 && !BloquerMottaper){
+                for(let i=4; i>=0; i--){
+                        if(td[i+nbrligne*5].textContent.length==1){
+                        td[i+nbrligne*5].textContent="";
+                        if (colonneActu>0){
+                        colonneActu --;}
+                        motJoueur=motJoueur.slice(0, -1);
+                        return ;
+                }
+                }
+                }
+        }, { signal });
+        }
+        function sourisBoutonInfoEntrer(){
+                boutonInfo.style.textShadow="0 0 1px #2E1D1D, 0 0 2px rgba(46, 29, 29, 0.8), 0 0 4px rgba(46, 29, 29, 0.5), 0 0 8px rgba(46, 29, 29, 0.3)";
+        }
+        function sourisBoutonInfoSortie(){
+                boutonInfo.style.textShadow="none";
+        }
+        function placement(tableauEssai, nbrligne){
+                let td=document.querySelectorAll('td');
+                for(let index=0; index<tableauEssai.length; index++){
+                if(tableauEssai[index]==="ABSENT "){
+                        if (tours%2==0){
+                                td[index+nbrligne*5].style.backgroundColor="#B65353"
+                        }
+                        else{
+                                td[index+nbrligne*5].style.backgroundColor="rgb(185, 81, 81)";
+                }
+                }
+
+                else if (tableauEssai[index]==="PRESENT"){
+                        if (tours%2==0){
+                                td[index+nbrligne*5].style.backgroundColor="#E8C547"
+                        }
+                        else{
+                                td[index+nbrligne*5].style.backgroundColor="#ffef16";
+                        }
+                }
+
+                else {
+                        if (tours%2==0){
+                                td[index+nbrligne*5].style.backgroundColor="#6AAB78"
+                        }
+                        else{
+                                td[index+nbrligne*5].style.backgroundColor="rgb(123, 190, 35)";
+                        }
+                }
+                }
+        }
+        async function envoiMutiRenseignement(nomJoueur1, nomJoueur2, tours){
+                let options={
+                method:"POST",
+                headers: {
+                        "Content-type":"application/json"
+                },
+                body: JSON.stringify({nomJoueur1:nomJoueur1, nomJoueur2:nomJoueur2, NombreDeTour:String(tours)})
+                };
+
+                let reponse= await fetch("http://localhost:8080/api/renseignementmulti", options);
+                let resultat = await reponse.json();
+        }
+                async function EnvoipourVainqueur(mot){
+                let options={
+                method:"POST",
+                headers: {
+                        "Content-type":"application/json"
+                },
+                body: JSON.stringify({essai:mot})
+                };
+
+                let reponse= await fetch("http://localhost:8080/api/vainqueur", options);
+                let resultat = await reponse.json();
+                return resultat;
+        }
+        async function envoiEssai(mot, nbrligne){
+                let options={
+                method:"POST",
+                headers: {
+                        "Content-type":"application/json"
+                },
+                body: JSON.stringify({essai:mot})
+                };
+
+                let reponse= await fetch("http://localhost:8080/api/verifier", options);
+                let resultat = await reponse.json();
+                placement(resultat, nbrligne);
+        }
+
+        async function RecevoirScoreJoueur1(){
+                let options={
+                method:"GET",
+                headers: {
+                        "Content-type":"application/json"
+                },
+        };
+
+        let reponse= await fetch("http://localhost:8080/api/scorej1", options);
+        let resultat = await reponse.json();
+        return resultat;
+        }
+        async function RecevoirScoreJoueur2(){
+                let options={
+                method:"GET",
+                headers: {
+                        "Content-type":"application/json"
+                },
+        };
+
+        let reponse= await fetch("http://localhost:8080/api/scorej2", options);
+        let resultat = await reponse.json();
+        return resultat;
+        }
+        
+        async function reset(){
+                let options={
+                method:"GET",
+                headers: {
+                        "Content-type":"application/json"
+                },
+        };
+
+        let reponse= await fetch("http://localhost:8080/api/reset", options);
+        }
+
+        /*document.addEventListener('mousemove', (event) => {
+                console.log(`Position X : ${event.clientX} | Position Y : ${event.clientY}`);
+        });*/
+</script>

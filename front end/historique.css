@@ -1,0 +1,44 @@
+body{
+    background-color: #2E1D1D;
+    color:#FFF5DB;
+    user-select: none;
+
+}
+
+#Titre {
+    text-align: center;
+    font-size: 38px;
+    font-family: "Sekuya", system-ui;
+    letter-spacing: 3px;
+    padding-bottom: 5vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: ease-in-out all 1s;
+
+}
+.pointille{
+    opacity: 0;
+}
+.score {
+    color: #2E1D1D;
+    font-family: "Sekuya", system-ui;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 1%;
+    border-radius: 5px;
+    border: none;
+    position: absolute;
+    transition: all ease-in-out .4s ;
+    background-color: rgb(243, 248, 222);
+    
+}
+
+.score:hover{
+    cursor: pointer;
+    background-color: rgb(182, 184, 176);
+
+}

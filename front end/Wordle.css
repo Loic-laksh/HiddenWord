@@ -1,0 +1,374 @@
+body{
+    /*background-color: #2E1D1D; /* ou je pense #241512*/
+    background: linear-gradient( to right, #2E1D1D 50%, #1b110f 80% );
+    color:#FFF5DB;
+    user-select: none;
+    transition: all 1s ease-in-out;
+    overflow: hidden;
+}
+
+
+a{
+    text-decoration: none;
+}
+
+#Titre {
+    text-align: center;
+    transform: scaleY(1.9) scaleX(1.6);
+    font-size: clamp(5rem, 8vw, 9rem);
+    transition: ease-in-out all 3s;
+    font-family: "Archivo Black", sans-serif;
+    position: absolute;
+    font-weight: 400;
+    background: linear-gradient( to right, rgba(255, 245, 219, 0.2) 30%, rgba(255, 245, 219, 0.8) 50%, rgba(255, 245, 219, 0.2) 70% );
+    background-clip: text;
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: -6px;
+    line-height: 2;
+    z-index: -1;
+    left: 20%;
+    top: -50%;
+    animation-name: apparition;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards
+
+}
+
+
+@keyframes apparition{
+    from{
+        top: -50%;
+    }
+    to{
+        top: -10%;
+    }
+}
+/* Menu */
+
+.element {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 30% 50%;
+    grid-template-rows: repeat(6, 100px);
+    gap: 20px;
+    justify-content: center;
+    /**/
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+}
+
+.fa-user{
+    font-size: 90px;
+    color: #2E1D1D;
+    padding-bottom: 14%;
+    opacity: 0.5;
+}
+
+.fa-user-friends{
+    font-size: 80px;
+    color: #2E1D1D;
+    position: absolute;
+    left:79%;
+    top: 10%;
+    opacity: 0.5;
+}
+
+.fa-history{
+    font-size: 60px;
+    color: #2E1D1D;
+    position: absolute;
+    left:85%;
+    top: 10%;
+    opacity: 0.5;
+}
+#Solo {
+    grid-column: 1;
+    grid-row: 1 / 7;
+}
+
+#Duo {
+    grid-column: 2;
+    grid-row: 1 / 4;
+    padding-top: 12%;
+    margin-bottom: 0;
+}
+
+#Score {
+    grid-column: 2;
+    grid-row: 4 / 7;
+    padding-top: 8%;
+}
+.options{
+
+    padding: 1.8rem;
+    background-color: #FFF5DB;
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 5vh;
+    transition: ease-in-out all 0.25s;
+    overflow: hidden;
+    
+
+
+}
+.options:hover {
+    cursor: pointer;
+    transform: translateY(-4px);
+    box-shadow:
+    0 0 10px rgba(255, 220, 150, 0.3),
+    0 0 20px rgba(255, 220, 150, 0.2),
+    0 0 35px rgba(255, 220, 150, 0.12);
+}
+.options > a{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+}
+
+.fa-user{
+    align-self: flex-end;
+}
+
+
+
+.titreMenu{
+    color: #2E1D1D;
+    font-size: 40px;
+    font-family: "Sekuya", system-ui;
+    transition: ease-in-out color 0.25s;
+    margin: 0;
+    margin-bottom: 2%;
+    opacity: 0.9;
+
+
+}
+
+.txtmenu{
+    color: #2E1D1D;
+    font-size: 25px;
+    font-weight: 900;
+    margin: 0;
+    font-family: "Manrope", sans-serif;
+}
+
+
+.fleche{
+    font-family: "Elsie", serif;
+    font-size: 45px;
+    font-weight: 900;
+    color: #FFF5DB;
+    padding: 3px 12px 7px 12px ;
+    border: 1px solid #2E1D1D;
+    border-radius: 50%;
+    background: #2E1D1D;
+    transition: 0.3s;
+    box-shadow: 2px 5px 20px  rgb(71, 70, 70);
+    position: absolute;
+    top: 65%;
+    left: -40%;
+    transition: ease-in-out all 0.25s;
+    
+
+}
+
+.flecheDuo{
+
+    top: 55%;
+    left: -40%;
+
+
+}
+.flechehis{
+    top: 50%;
+    left: -40%;}
+
+.fleche:hover {
+    transform: scale(1.08);
+}
+.options:hover .titreMenu {
+    color: #582916d5;
+}
+/*footer*/
+#mes_infos{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    width: 99%;
+}
+
+#contact {
+    margin-left: auto;
+}
+
+#contact a {
+    color: #FFF5DB;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: 0.3s;
+    text-decoration: none;
+    bottom: 15px;
+}
+
+#contact a:hover{
+    cursor: pointer;
+    text-shadow:
+    0 0 1px white,
+    0 0 2px #ffdC96,
+    0 0 4px #ffdC96,
+    0 0 8px #ffdC96;
+}
+
+#mon_nom {
+
+    color: #FFF5DB;
+    letter-spacing: 1.5px;
+
+    font-size: 12px;
+    font-family: "Sekuya", system-ui;
+
+
+}
+
+.fa-phone{
+    animation-name: contact;
+    animation-timing-function: ease-in-out;
+    animation-delay: 3s;
+    animation-iteration-count: 3;
+    animation-duration: 1s;
+    transform: scale(1);
+}
+
+.fa-linkedin{
+    animation-name: contact;
+    animation-timing-function: ease-in-out;
+    animation-delay: 6s;
+    animation-iteration-count: 3;
+    animation-duration: 1s;
+    transform: scale(1);
+}
+
+.fa-envelope{
+    animation-name: contact;
+    animation-timing-function: ease-in-out;
+    animation-delay: 9s;
+    animation-iteration-count: 3;
+    animation-duration: 1s;
+    transform: scale(1);
+}
+
+@keyframes contact{
+    0%, 100%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(1.2);
+    }
+}
+
+/*animation de fin*/
+#BackgroundAnimation{
+    width: 100%;
+    height: 100%;
+    background-color: #2E1D1D;
+    z-index: 103;
+    transition: transform 1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(-100%);
+    overflow: hidden;
+}
+
+/* Pour les écrans normaux */
+/*
+@media screen and (min-width: 769px) {
+
+    #Titre {
+        font-size: clamp(32px, 3vw, 48px);
+        margin-top: 4vh;
+    }
+
+    .options {
+        width: clamp(180px, 18vw, 260px);
+        padding: clamp(1.3rem, 2vw, 2rem);
+        margin-bottom: clamp(20px, 3vh, 35px);
+    }
+
+    p {
+        font-size: clamp(16px, 1.3vw, 20px);
+    }
+
+}
+
+*/
+/* Pour les petits écrans */
+/*
+@media screen and (max-width: 480px) {
+
+    #Titre {
+        font-size: 28px;
+        letter-spacing: 2px;
+        margin-top: 5vh;
+        padding-bottom: 8%;
+    }
+
+    .options {
+        width: 160px;
+        height: 35px;
+        padding: 1.2rem;
+        border-radius: 16px;
+        margin-bottom: 7%;
+    }
+
+    .titreMenu {
+        font-size: 15px;
+    }
+
+    #mes_infos {
+        width: 94%;
+        bottom: 8px;
+    }
+
+    #mon_nom {
+        font-size: 9px;
+        letter-spacing: 1px;
+    }
+
+    #contact a {
+        font-size: 19px;
+        margin: 0 5px;
+    }
+
+}
+
+*/
+/* Pour les grands écrans */
+/*
+@media screen and (min-width: 1600px) {
+
+    #Titre {
+        font-size: 48px;
+        margin-top: 5vh;
+    }
+
+    .options {
+        width: 260px;
+        padding: 2rem;
+        margin-bottom: 35px;
+    }
+
+    .titreMenu {
+        font-size: 23px;
+    }
+}
+*/

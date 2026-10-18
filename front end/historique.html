@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Historique </title>
+<link rel="stylesheet" href="historique.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Elsie:wght@400;900&family=Sekuya&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <button class="score" type="button"> mon score</button>
+
+    <div>
+        <h1 id="Titre"> C'est en conception <span class="pointille">.</span><span class="pointille">.</span><span class="pointille">.</span></h1>
+    </div>
+</body>
+
+<script>
+
+    window.addEventListener("mousemove",bouger);
+    let bouton=document.querySelector(".score");
+    let rec=bouton.getBoundingClientRect();
+    let titre=document.getElementById("Titre");
+    let pointille=document.querySelectorAll(".pointille");
+
+    function bouger(event){
+        console.log(bouton.getBoundingClientRect());
+        console.log(event.pageX);
+        console.log(event.pageY);
+        rec=bouton.getBoundingClientRect();
+
+        if (event.pageX + 10 <= rec.right && event.pageX - 10 >= rec.left && event.pageY + 10 >= rec.top && event.pageY - 10 <= rec.bottom) {
+            bouton.style.left = (Math.random()*800) + "px";
+            bouton.style.top = (Math.random()*800) + "px"
+        }
+    }
+
+    bouton.addEventListener("click", ()=>{
+    titre.style.opacity = 1;
+    bouton.style.opacity = 0;
+    bouton.style.display = "none";
+    for(let i = 0; i < pointille.length; i++) {
+            setTimeout(() => {
+                pointille[i].style.opacity = 1;
+            }, 800 * i);
+        }
+        setInterval(() => {
+            setTimeout(() => {
+                for(let i = 0; i < pointille.length; i++) {
+                    setTimeout(() => {
+                        pointille[i].style.opacity = 1;
+                    }, 800 * i);
+                }
+            }, 550);
+            for(let j = 0; j < pointille.length; j++) {
+                pointille[j].style.opacity = 0;
+            }
+        }, 3000);
+    });
+
+</script>

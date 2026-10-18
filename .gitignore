@@ -1,0 +1,15 @@
+# Fichiers compilés Java
+**/target/
+
+# VS Code
+.vscode/
+**/.vscode/
+
+# IntelliJ
+.idea/
+**/.idea/
+*.iml
+
+# Fichiers système
+.DS_Store
+Thumbs.db

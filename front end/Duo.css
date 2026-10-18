@@ -1,0 +1,599 @@
+body{
+    background-color: #FFF5DB;
+    font-size: 18px;
+    font-family: "Sekuya", system-ui;
+    color: #2E1D1D;
+    overflow: hidden;
+    user-select: none;
+}
+/* Titres + Joueurs */
+#Titre {
+    text-align: center;
+    font-size: 38px;
+    font-family: "Sekuya", system-ui;
+    letter-spacing: 3px;
+    padding-bottom: 5vh;
+    opacity: 0;
+    transition: ease-in-out 1s;
+    background: linear-gradient( to right, #FFF5DB 50%, #2E1D1D 50% );
+    background-clip: text;
+    color: transparent;
+}
+
+#J1{
+    font-size: 58px;
+    position: absolute;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    color: #ad7578;
+    opacity: 0;
+    transition:  ease-in-out all 0.5s;
+
+}
+
+#J2{
+    font-size: 58px;
+    position: absolute;
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+    color: #a08c63;
+    opacity: 0;
+    transition:  ease-in-out all 0.5s;
+    
+}
+
+
+/* Les tables */
+table{
+
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: ease-in-out 1s;
+
+
+}
+
+td{
+    border: 3px solid #2E1D1D;
+    width:3em;
+    height: 3em;
+    font-size: 30px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+td:hover{
+    background-color: #5e3f3f;
+}
+
+tr{
+    position: relative;
+    transition: left 0.1s ease;
+
+
+}
+/* Info du joueur */
+
+.renseignement{
+    text-align: justify;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 2%;
+    width: 70%;
+    background-color: #e4dfd2;
+    border-radius: 15px;
+    opacity: 0;
+    transition:  ease-in-out all 0.5s;
+    box-shadow: 0px 10px 20px rgb(71, 70, 70);
+    display: flex;
+    flex-direction: column;
+    gap: 2%;
+}
+.question{
+    gap: 2%;
+}
+
+.question input {
+    width: 160px;
+}
+.fait {
+    color: #2E1D1D;
+    font-family: "Sekuya", system-ui;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 1% 3%;
+    border-radius: 5px;
+    border: none;
+    
+}
+
+.fait:hover{
+    cursor: pointer;
+    background-color: rgb(243, 248, 222);
+
+}
+/* Règles*/
+
+.regleMot {
+    text-align: center;
+    padding-top: 5vh;
+    opacity: 0;
+    color: rgb(129, 23, 23);
+    transform: scale(1);
+    animation-name: regles;
+    animation-duration: 1s;
+    animation-delay: 3s;
+    animation-iteration-count: infinite;
+    transition:  ease-in-out all 0.5s;
+}
+
+#repetition{
+    padding-top: 0;
+}
+
+.overlay{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    transition:  ease-in-out all 0.25s;
+
+}
+@keyframes regles{
+    0%{
+        transform: scale(1);
+    }
+
+    50%{
+        transform: scale(1.2);
+    }
+
+    100%{
+        transform: scale(1);
+    }
+}
+
+.regles {
+    text-align: justify;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 2%;
+    width: 30%;
+    background-color: #e4dfd2;
+    border-radius: 15px;
+    opacity:0;
+    display: none;
+    transition: ease-in-out all 0.25s;
+    box-shadow: 2px 5px 15px  rgb(71, 70, 70);
+    color:#2E1D1D;
+
+    
+}
+
+.compris {
+    color: #2E1D1D;
+    font-family: "Sekuya", system-ui;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 2% 5%;
+    border-radius: 5px;
+    border: none;
+    
+}
+
+.compris:hover{
+    cursor: pointer;
+    background-color: rgb(243, 248, 222);
+
+}
+
+/* score */
+
+.score{
+    position: absolute;
+    top: 15%;
+    left: 16%;
+    opacity: 0;
+    padding-top: 5vh;
+    color: #2E1D1D;
+    transition: opacity 0.5s ease-in-out, color 2s ease-in-out;
+}
+
+
+
+/* Bouton continuer pour les tours */
+.continuer {
+    color: #2E1D1D;
+    font-family: "Sekuya", system-ui;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 1% 3%;
+    border-radius: 5px;
+    border: none;
+    background-color: #dbd2bb;
+    position: absolute;
+    top:80%;
+    right: 5%;
+    z-index: 10;
+    display: none;
+    opacity: 0;
+    transition: ease-in-out all 0.5s;
+    
+}
+
+.continuer:hover{
+    cursor: pointer;
+    background-color: #cfc3a2;
+
+}
+
+/* mot de fin*/
+
+.motdefin{
+
+    text-align: justify;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    padding: 2%;
+    width: 25%;
+    height: 62%;
+    background-image: url("interface.png");
+    background-repeat: repeat;
+    border-radius: 15px;
+    opacity:1;
+    transition: ease-in-out all 0.25s;
+    box-shadow: 2px 5px 15px  rgb(71, 70, 70);
+    color: #2E1D1D;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    display: none;
+    opacity: 0;
+
+}
+
+.warning{
+    color:#9F4346;
+    padding: 2%;
+}
+.entete{
+    display: flex;
+    align-items: center;
+}
+.entete img{
+    height: 10%;
+    width: 10%;
+    border: 2px solid #2E1D1D;
+    padding: 2px ;
+}
+.quete{
+    
+    text-shadow :
+    0 0 10px rgba(102, 13, 18, 0.6),
+    0 0 20px rgba(102, 13, 18, 0.4),
+    0 0 35px rgba(102, 13, 18, 0.25);
+    font-size: 28px;
+    border: 2px solid #2E1D1D;
+    padding: 2px 6%;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.centre{
+    text-align: center;
+
+}
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4%;
+    margin-top: 6%;
+}
+.stats div{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0px 10%;
+}
+
+.stats div p {
+        text-shadow :
+    0 0 10px rgba(102, 13, 18, 0.6),
+    0 0 20px rgba(102, 13, 18, 0.4),
+    0 0 35px rgba(102, 13, 18, 0.25);
+}
+.motdefin hr{
+    border:none;
+    height: 4px;
+    background-color: #2E1D1D;
+    box-shadow :
+    0 0 10px rgba(102, 13, 18, 0.6),
+    0 0 20px rgba(102, 13, 18, 0.4),
+    0 0 35px rgba(102, 13, 18, 0.25);
+    margin-top: 6%;
+}
+
+.resultat{
+    text-shadow :
+    0 0 10px rgba(102, 13, 18, 0.6),
+    0 0 20px rgba(102, 13, 18, 0.4),
+    0 0 35px rgba(102, 13, 18, 0.25);
+    font-size: 23px;
+    font-weight: 1000;
+
+}
+
+.Recommencer{
+    color: #2E1D1D;
+    font-family: "Roboto", system-ui;
+    font-size: 18px;
+    font-weight: 800;
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    padding: 2% 5%;
+    border-radius: 5px;
+    border: none;
+    background-color: transparent;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+.txt{
+    position: relative;
+    text-shadow :
+    0 0 10px rgba(102, 13, 18, 0.6),
+    0 0 20px rgba(102, 13, 18, 0.4),
+    0 0 35px rgba(102, 13, 18, 0.25);
+    z-index: 1;
+    transition: ease-in-out 0.8s;
+}
+
+.bloc{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #6e3c3c;
+    z-index: -1;
+    transition: ease-in-out 0.5s;
+
+}
+.Recommencer:hover {
+    cursor: pointer;
+}
+.Recommencer:hover .bloc {
+    width: 100%;
+}
+
+.Recommencer:hover .txt {
+    color: #FFF5DB;
+    text-shadow:
+    0 0 1px white,
+    0 0 2px #ffdC96,
+    0 0 4px #ffdC96,
+    0 0 8px #ffdC96;
+}
+
+#menu{
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    height: 10%;
+    width: 12%;
+    
+
+}
+/* Mes infos */
+.mes_infos{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 10px;
+    width: 99%;
+    opacity: 0;
+    transition: ease-in-out 1s;
+    
+}
+
+#mon_nom {
+    font-size: 12px;
+    letter-spacing: 2.5px;
+
+}
+
+#info{
+    font-family: "Elsie", serif;
+    font-size: 25px;
+    margin-left: auto;
+    color: #FFF5DB;
+    padding: 7px 17px 7px 17px ;
+    border: 1px solid #2E1D1D;
+    border-radius: 50%;
+    background: #2E1D1D;
+    transition: 0.3s;
+    box-shadow: 2px 5px 15px  rgb(71, 70, 70);
+
+
+
+}
+#info:hover{
+    cursor: pointer;
+    text-shadow:
+    0 0 1px white,
+    0 0 2px #ffdC96,
+    0 0 4px #ffdC96,
+    0 0 8px #ffdC96;
+}
+
+/* Animation */
+
+#rectangleJoueur{
+    width: 0%;
+    height: 100%;
+    background-color: #2E1D1D;
+    z-index: -1;
+    transition: ease-in-out 0.5s;
+    animation-name: rectangle;
+    animation-duration: 2s;
+    animation-delay: 11s;
+    animation-fill-mode: forwards;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+@keyframes rectangle{
+    0%{
+        width: 0%;
+    }
+
+    100%{
+        width: 50%;
+    }
+
+}
+
+#Logo{
+    height: 50%;
+    width: 30%;
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: ease-in-out 0.5s;
+    animation-name: ApparitionImage, disparitionImage;
+    animation-duration: 1s,2s;
+    animation-delay: 0s, 8s;
+    animation-fill-mode: forwards;
+    scale: 0;
+}
+#BackgroundAnimation{
+    width: 100%;
+    height: 100%;
+    background-color: #2E1D1D;
+    z-index: -1;
+    transition: ease-in-out 0.5s;
+    animation-name: progression;
+    animation-duration: 2s;
+    animation-delay: 8s;
+    animation-fill-mode: forwards;
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    overflow: hidden;
+}
+
+#BarredeProgression{
+    width: 0%;
+    height: 1%;
+    background-color: #FFF5DB;
+    z-index: -1;
+    transition: ease-in-out 0.5s;
+    animation-name: progressionBarre, Disparition;
+    animation-duration: 6s, 1s;
+    animation-delay: 2s, 8s;
+    animation-fill-mode: forwards;
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+    opacity: 1;
+}
+
+@keyframes progressionBarre{
+    0%{
+        width: 0%;
+        opacity: 1;
+    }
+
+    20%{
+        width: 40%;
+    }
+
+    40%{
+        width: 60%;
+    }
+    100%{
+        width: 80%;
+    }
+
+
+}
+
+@keyframes Disparition{
+    0%{
+        opacity: 1;
+    }
+    80%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 0;
+        display: none;
+    }
+
+}
+
+
+@keyframes progression{
+    0%{
+        bottom: 0%;
+    }
+
+    95%{
+        bottom: 100%;
+    
+    }
+    100%{
+        bottom: 100%;
+        display: none;
+    }
+}
+
+@keyframes disparitionImage{
+    0%{
+        top: 40%;
+    }
+
+    95%{
+        top: -50%;
+    
+    }
+    100%{
+        top: -50%;
+        display: none;
+    }
+}
+
+@keyframes ApparitionImage{
+    0%{
+        scale: 0;
+    }
+    100%{
+        scale: 1;
+    }
+}
+

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Hidden Word </title>
+<link rel="stylesheet" href="Wordle.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Elsie:wght@400;900&family=Manrope:wght@400;500;600;700&family=Sekuya&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+    <span id="BackgroundAnimation"></span>
+    <h1 id="Titre">Find<span> my word</span>
+    </h1>
+
+    <div class="element">
+    <div class="options" id="Solo">
+        <a href="javascript:decalage('Solo.html')">
+            <i class="fa-solid fa-user"></i>
+            <p class="titreMenu"> Solo Leveling </p>
+            <p class="txtmenu"> Affronte seul le jeu, améliore toi et gagne en XP </p>
+            <p class="fleche">&rarr;</p>
+    </a>
+    </div>
+    <div class="options" id="Duo">
+        <a href="javascript:decalage('Duo.html')">
+            <i class="fas fa-user-friends"></i>
+            <p class="titreMenu"> Duo </p>
+            <p class="txtmenu"> Joue contre un ami (En Local) </p>
+            <p class="fleche flecheDuo">&rarr;</p>
+        </a>
+    </div>
+    <div class="options" id="Score">
+        <a href="javascript:decalage('historique.html')">
+            <i class="fas fa-history"></i>
+            <p class="titreMenu"> Historique </p>
+            <p class="txtmenu"> Retrouve tes parties </p>
+            <p class="fleche flechehis">&rarr;</p>
+        </a>
+    </div></div>
+<footer>
+<div id="mes_infos">
+<p id="mon_nom"> Réalisé par Loïc LAKSHMINARAYANAN</p>
+
+<div id="contact">
+    <a class="fa-solid fa-phone" ></a>
+    <a class="fa-brands fa-linkedin" href="https://www.linkedin.com/in/lo%C3%AFc-lakshminarayanan-2535802b1/" target="_blank"></a>
+    <a class="fa-solid fa-envelope"></a></div></div>
+
+</footer>
+</body>
+
+
+<script>
+    let paragraphes= document.querySelectorAll(".options");
+    let fleche =document.querySelectorAll(".fleche");
+    let rectangleFin= document.getElementById("BackgroundAnimation");
+    rectangleFin.style.transform = "translateY(-100%)";
+
+    paragraphes.forEach((div, index) => {div.addEventListener("mouseover", function(){
+
+
+    fleche[index].style.left="70%";
+    });
+    div.addEventListener("mouseleave", function(){
+
+
+        fleche[index].style.left="-40%";
+    });
+
+
+        
+    });
+    window.addEventListener("pageshow", function() {
+    rectangleFin.style.transition = "none";
+    rectangleFin.style.transform = "translateY(-100%)";
+
+    setTimeout(function() {
+        rectangleFin.style.transition = "transform 1s ease-in-out";
+    }, 10);
+});
+    function decalage (URL) {
+    rectangleFin.style.transform = "translateY(0)"
+    setTimeout( function() { window.location = URL
+    }, 1000 );
+}
+
+document.querySelector(".fa-envelope").addEventListener("click", function() {
+    navigator.clipboard.writeText("loic.lakshminarayanan@gmail.com");
+    alert("Le mail a bien été copié !");
+    this.style.cursor="pointer";
+});
+
+document.querySelector(".fa-phone").addEventListener("click", function() {
+    navigator.clipboard.writeText("0782506353");
+    
+
+    alert("Le numéro de téléphone a bien été copié !");
+});
+
+</script>
