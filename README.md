@@ -98,10 +98,9 @@ J'ai ensuite utilisé l'intelligence artificielle afin de reproduire mon dessin 
 La version obtenue est ensuite devenue le logo utilisé sur le site (page Duo).
 
 <p align="center">
-  <img src="images/Logo_fin.jpeg" width="350" alt="Logo final Find My Word">
+<img src="front%20end/Logo.png" alt="Logo Find My Word" width="250">
 </p>
 
-<img src="front%20end/Logo.png" alt="Logo Find My Word" width="250">
 
 ---
 
