@@ -674,7 +674,7 @@
                 body: JSON.stringify({nomJoueur1:nomJoueur1, nomJoueur2:nomJoueur2, NombreDeTour:String(tours)})
                 };
 
-                let reponse= await fetch(API_URL +"renseignementmulti", options);
+                let reponse= await fetch(API_URL +"/api/renseignementmulti", options);
                 let resultat = await reponse.json();
         }
                 async function EnvoipourVainqueur(mot){
@@ -686,7 +686,7 @@
                 body: JSON.stringify({essai:mot})
                 };
 
-                let reponse= await fetch(API_URL +"/vainqueur", options);
+                let reponse= await fetch(API_URL +"/api/vainqueur", options);
                 let resultat = await reponse.json();
                 return resultat;
         }
@@ -699,7 +699,7 @@
                 body: JSON.stringify({essai:mot})
                 };
 
-                let reponse= await fetch(API_URL +"/verifier", options);
+                let reponse= await fetch(API_URL +"/api/verifier", options);
                 let resultat = await reponse.json();
                 placement(resultat, nbrligne);
         }
@@ -712,7 +712,7 @@
                 },
         };
 
-        let reponse= await fetch(API_URL +"scorej1", options);
+        let reponse= await fetch(API_URL +"/api/scorej1", options);
         let resultat = await reponse.json();
         return resultat;
         }
@@ -724,7 +724,7 @@
                 },
         };
 
-        let reponse= await fetch("scorej2", options);
+        let reponse= await fetch("/api/scorej2", options);
         let resultat = await reponse.json();
         return resultat;
         }
@@ -737,7 +737,7 @@
                 },
         };
 
-        let reponse= await fetch(API_URL +"/reset", options);
+        let reponse= await fetch(API_URL +"/api/reset", options);
         }
 
         /*document.addEventListener('mousemove', (event) => {

@@ -536,7 +536,7 @@
             body: JSON.stringify({Nom:Joueur, NombreDeTour:String(tours)})
         };
 
-        let reponse= await fetch(API_URL +"/renseignement", options);
+        let reponse= await fetch(API_URL +"/api/renseignement", options);
         let resultat = await reponse.json();
     }
         async function EnvoipourVainqueur(mot){
@@ -548,7 +548,7 @@
             body: JSON.stringify({essai:mot})
         };
 
-        let reponse= await fetch(API_URL +"/vainqueur", options);
+        let reponse= await fetch(API_URL +"/api/vainqueur", options);
         let resultat = await reponse.json();
         return resultat;
     }
@@ -561,7 +561,7 @@
             body: JSON.stringify({essai:mot})
         };
 
-        let reponse= await fetch(API_URL +"/verifier", options);
+        let reponse= await fetch(API_URL +"/api/verifier", options);
         let resultat = await reponse.json();
         placement(resultat, nbrligne);
     }
@@ -574,7 +574,7 @@
             },
         };
 
-        let reponse= await fetch(API_URL +"/score", options);
+        let reponse= await fetch(API_URL +"/api/score", options);
         let resultat = await reponse.json();
         return resultat;
     }
