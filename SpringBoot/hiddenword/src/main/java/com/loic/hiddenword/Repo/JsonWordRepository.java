@@ -17,7 +17,7 @@ public class JsonWordRepository extends WordRepository {
         /*
             Permet d’initialiser la liste de mots grâce au fichier JSON
         */
-        this.listeMots = new JsonWordSet("SpringBoot/hiddenword/src/main/java/com/loic/hiddenword/autres/mots.json");
+        this.listeMots = new JsonWordSet("mots.json");
     }
 
 /* La méthode */
