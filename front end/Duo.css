@@ -29,6 +29,7 @@ body{
     color: #ad7578;
     opacity: 0;
     transition:  ease-in-out all 0.5s;
+    white-space: nowrap;
 
 }
 
@@ -41,6 +42,7 @@ body{
     color: #a08c63;
     opacity: 0;
     transition:  ease-in-out all 0.5s;
+    white-space: nowrap;
     
 }
 
@@ -77,6 +79,15 @@ tr{
 
 
 }
+
+#clavierMobile{
+    position: fixed;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    font-size: 16px;
+}
+
 /* Info du joueur */
 
 .renseignement{
@@ -209,14 +220,182 @@ tr{
 
 .score{
     position: absolute;
-    top: 15%;
-    left: 16%;
+    top: 16%;
+    left: 12%;
     opacity: 0;
-    padding-top: 5vh;
     color: #2E1D1D;
-    transition: opacity 0.5s ease-in-out, color 2s ease-in-out;
+    border: 4px solid #FFF5DB;
+    border-radius: 30px;
+    padding: 3%;
+    box-shadow: 0 8px 18px rgba(46, 29, 29, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    transition: ease-in-out all 0.5s;
 }
 
+
+
+.divScore{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    transition: ease-in-out all 0.5s;
+}
+
+.divScore hr{
+    width: 55px;
+    height: 2px;
+
+    border: none;
+    background-color: #AC8D67;
+}
+
+.fa-crown{
+    font-size: 30px;
+    color: #AC8D67;
+}
+
+
+
+.titreScore{
+    margin: 15px 0 20px 0;
+    padding: 0;
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+
+
+
+.scoreaffiche{
+    width: 80%;
+    padding: 20px 0;
+    font-size: 30px;
+    text-align: center;
+    background-color: #F3E6C8;
+    border-radius: 12px;
+    transform: scaleY(1.4);
+    transition: ease-in-out all 0.5s;
+}
+
+.spanscore1{
+    color: #2E1D1D;
+}
+
+.motsecret{
+    width: 100%;
+    margin-top: 35px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    transition: ease-in-out all 0.5s;
+    opacity: 0;
+}
+
+.motsecret p{
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.motsecretValeur{
+    width: 90%;
+    padding: 15px 20px;
+    color: #2E1D1D;
+    text-align: center;
+    font-size: 30px;
+    background-color: #F3E6C8;
+    border-radius: 12px;
+    transform: scaleY(1.15);
+    transition: ease-in-out all 0.5s;
+}
+
+
+/*Informations partie en cours */
+
+.fa-gem {
+    color: #AC8D67;
+    font-size: 30px;
+
+}
+
+.infopartie{
+    position: absolute;
+    top: 16%;
+    left: 72%;
+    opacity: 0;
+    color: #2E1D1D;
+    transition:  ease-in-out all 0.5s;
+    border: 4px solid #FFF5DB;
+    padding: 3.1%;
+    border-radius: 30px;
+    box-shadow: 0 8px 18px rgba(46, 29, 29, 0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.infopartie hr{
+    width: 105%;
+    height: 2px;
+    border: transparent;
+    border-radius: 20%;
+    background: linear-gradient(to right, #AC8D67, transparent, #AC8D67);
+    margin-bottom: 12%;
+}
+.ensemblequete{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid #F3E6C8;
+    border-radius: 6% / 10%;
+    background-color: #F3E6C8;
+    width: 100%;
+    gap: 4%;
+    transition: ease-in-out all 0.5s;
+}
+.ensemblequete p{
+    margin: 5%;
+}
+.divQuete{
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    gap: 6%;
+    height: 50px;
+    
+}
+.divQuete p{
+    white-space: nowrap;
+    color: #FFF5DB;
+}
+.titrequete{
+    color: #AC8D67;
+
+
+}
+.listequete{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 80%;
+    
+}
+
+
+.divScore p,
+.divQuete p{
+    margin: 0;
+    padding: 0;
+}
 
 
 /* Bouton continuer pour les tours */
@@ -597,3 +776,165 @@ tr{
     }
 }
 
+/* Pour les téléphones */
+@media screen and (max-width: 480px) {
+
+    body{
+        overflow-x: hidden;
+    }
+
+    #Titre{
+        transform: none;
+        font-size: 24px;
+        line-height: 1.15;
+        letter-spacing: 1px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: -2.5%;
+        text-align: center;
+        padding-bottom: 5%;
+    }
+
+    td{
+        font-size: 25px;
+    }
+
+    table{
+        transform: scale(0.9);
+        position: absolute;
+        top: 33.5%;
+        width: 100%;
+    }
+
+    .motAffiche{
+        top: 44%;
+    }
+
+    .score{
+        transform: scale(0.6);
+        top: 12%;
+        left: -10%;
+    }
+
+    .infopartie{
+        transform: scale(0.6);
+        top: 13%;
+        left: 28%;
+    }
+
+    .listequete{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .ensemblequete{
+        min-width: 85px;
+    }
+
+    .infopartie hr{
+        width: 100%;
+    }
+
+    .scoreaffiche{
+        font-size: 30px;
+        transform: scale(0.8) scaleY(1.4);
+        margin-bottom: 2%;
+    }
+
+    .motsecretValeur{
+        font-size: 24px;
+        padding: 12px 10px;
+    }
+
+    .motsecret{
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    #mon_nom{
+        font-size: 7px;
+    }
+
+    #info{
+        font-size: 15px;
+        padding: 5px 12px;
+    }
+
+    .question input{
+        width: 100px;
+    }
+
+    .renseignement{
+        font-size: 15px;
+        width: 82%;
+    }
+
+    .fait{
+        padding: 1% 3%;
+        margin-top: 10%;
+        font-size: 12px;
+    }
+
+    .continuer{
+        padding: 1% 3%;
+        border-radius: 5px;
+        top: 92%;
+        right: 5%;
+    }
+
+    .regles{
+        width: 85%;
+        font-size: 14px;
+        padding: 4%;
+    }
+
+    .compris{
+        font-size: 11px;
+    }
+
+    .motdefin{
+        width: 85%;
+        height: auto;
+        max-height: 85vh;
+        overflow-y: auto;
+    }
+
+    .mes_infos{
+        width: 95%;
+    }
+
+    .regleMot{
+        position: fixed;
+        left: 5%;
+        width: 90%;
+        top: 85%;
+        font-size: 11px;
+        z-index: 20;
+    }
+
+    #longueur{
+        top: 84%;
+    }
+
+    #repetition{
+        top: 87%;
+        padding-top: 0;
+    }
+
+
+
+
+    #J1,
+    #J2{
+        font-size: 25px;
+    }
+
+    #Logo{
+        width: 65%;
+        height: auto;
+    }
+
+}

@@ -32,6 +32,7 @@
                 <tr><td></td><td></td><td></td><td></td><td></td></tr>
                 <tr><td></td><td></td><td></td><td></td><td></td></tr>
         </table>
+        <input type="text" id="clavierMobile" maxlength="1">
                 <div class="renseignement">
                         <div class="question">
                         <label for="nom">Quel est le nom du premier Joueur ?</label>
@@ -70,7 +71,39 @@
 </div>
         
         </div>
-        <div class="score jeu"> Votre score est : <span class="spanscore1"></span></div>
+                <div class="score jeu">
+
+        <div class="divScore">
+                <hr>
+                <i class="fa-solid fa-crown"></i>
+                <hr>
+        </div>
+        <p class="titreScore">Votre score :</p>
+        <span class="spanscore1 scoreaffiche">0</span>
+        <div class="motsecret">
+                <p>Le mot était :</p>
+                <span class="motsecretValeur"></span>
+        </div>
+
+        </div>
+        
+        <div class="infopartie jeu">
+                <div class="divQuete">
+                <i class="fa-solid fa-gem"></i>
+                <p> Quête en cours</p>
+        </div>
+        <hr>
+        <div class="listequete">
+                <div class="ensemblequete">
+                        <p class="titrequete"> Round</p>
+                        <p><span class="comptetour"></span> / <span class="spantours"></span></p></div>
+                <div class="ensemblequete">
+                <p class="titrequete"> Essai</p>
+                <p><span class="essai"></span> / 6</p></div>
+                <div class="ensemblequete">
+                        <p class="titrequete"> Temps</p>
+                        <p><span class="tempsecoule"></span></p></div>
+        </div></div>
         <button class="continuer" type="button"> Continuer</button>
         <div class="mes_infos jeu">
                 <p id="mon_nom"> Réalisé par Loïc LAKSHMINARAYANAN</p>
@@ -88,8 +121,8 @@
         <p> Vainqueur</p>
         <p> [<span class="vainqueur"></span>]</p></div>
         <div>
-        <p> Nombre Round</p>
-        <p> [<span class="spantours"></span> /<span class="spantours"></span>]</p></div>
+        <p> Mot secret</p>
+        <p> [<span class="spanmotfin"></span>]</p></div>
         <div>
         <p> Score</p>
         <p> [<span class="spanscore"></span>]</p></div>
@@ -133,7 +166,7 @@
 
         setTimeout(()=>{
                 for(let i=0; i < apparitions.children.length; i++){
-                if (!apparitions.children[i].classList.contains("jeu")) {
+                if (!apparitions.children[i].classList.contains("jeu") && apparitions.children[i].id !== "clavierMobile") {
                         setTimeout(()=>{
                         apparitions.children[i].style.opacity=1;}, 500*i);}
                 }
@@ -156,6 +189,7 @@
         let overlay= document.querySelector(".overlay");
         let debut;
         let td=document.querySelectorAll('td');
+        let clavierMobile = document.getElementById("clavierMobile");
         let BloquerMottaper=false;
         let colonneActu=0;
         let nbrligne=0;
@@ -173,7 +207,26 @@
         let boutonInfo = document.getElementById("info");
         let SpanScore=document.querySelector(".spanscore");
         let afficheScore=document.querySelector(".spanscore1");
+        let secondesecoules=0;
+        let sec;
+        let min;
+        let heu;
+        let timer;
+        let essai=document.querySelector(".essai");
+        let comptetour=1;
+        let Spancomptetours=document.querySelector(".comptetour");
+        let Divmotsecret=document.querySelector(".motsecret");
+        let Spanmotsecret=document.querySelector(".motsecretValeur");
+        let spanmotsecretfin=document.querySelector(".spanmotfin");
+        let Infopartie=document.querySelector(".infopartie");
+        let divQuetepara=document.querySelector(".divQuete p")
 
+        td.forEach(caseJeu => {
+        caseJeu.addEventListener("click", () => {
+                clavierMobile.focus();
+        });
+        });
+        
         boutonfait.addEventListener("click", ()=>{
                 renseignement.style.opacity = 0;
                 setTimeout(() => {
@@ -219,7 +272,11 @@
         setTimeout(()=>{
                 body.style.color="#FFF5DB";
                 Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
+                //jsp si c oblige//
                 divScore.style.color="#FFF5DB";
+                divScore.style.border="border: 4px solid #FFF5DB";
+                Infopartie.style.border="border: 4px solid #FFF5DB";
+                divQuetepara.style.color="#FFF5DB";
                 boutonInfo.style.background="#FFF5DB";
                 boutonInfo.style.border="1px solid #FFF5DB";
                 boutonInfo.style.color="#2E1D1D";
@@ -268,8 +325,16 @@
                 
                 colonneActu=0;
                 nbrligne=0;
+                document.querySelector("table").classList.remove("motAffiche");
                 scoreJ1 =0;
                 scoreJ2 =0;
+                comptetour=1;
+                clearInterval(timer);
+                secondesecoules=0;
+                Divmotsecret.style.opacity = 0;
+                setTimeout(() => {
+                        Divmotsecret.style.display = "none";
+                }, 250);
                 motJoueur="";
                 setTimeout(()=>{
                 divj1.style.opacity=0;
@@ -281,6 +346,9 @@
                 body.style.color="#FFF5DB";
                 Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
                 divScore.style.color="#FFF5DB";
+                divScore.style.border="4px solid #FFF5DB";
+                Infopartie.style.border="4px solid #FFF5DB";
+                divQuetepara.style.color="#FFF5DB";
                 afficheScore.textContent=scoreJ1;
                 boutonInfo.style.background="#FFF5DB";
                 boutonInfo.style.border="1px solid #FFF5DB";
@@ -304,7 +372,26 @@
         });
 
         function lancerPartie(){
-        
+                Spancomptetours.textContent=comptetour;
+        essai.textContent=nbrligne;
+        timer = setInterval(() => {
+                secondesecoules++;
+                sec = secondesecoules % 60;
+                min = Math.floor((secondesecoules / 60) % 60);
+                heu = Math.floor(secondesecoules / 3600);
+                if(heu==0){
+                if(min==0){
+                        document.querySelector(".tempsecoule").textContent="00:"+sec;
+                }
+                else{
+                        document.querySelector(".tempsecoule").textContent=min+":"+sec;
+                }
+                }
+                else{
+                document.querySelector(".tempsecoule").textContent=heu+":"+min+":"+sec;
+                }
+                
+        }, 1000);
         let jeu= document.querySelectorAll(".jeu");
 
         setTimeout(()=>{
@@ -394,13 +481,14 @@
         let heures;
         
         boutonContinuer.addEventListener("click", () => {
-                
+                secondesecoules=0;
+
                 td.forEach(td => {
                         td.textContent = "";
                         td.style.backgroundColor = "";
                 });
                 nbrligne = 0;
-                
+                document.querySelector("table").classList.remove("motAffiche");
                 
                 boutonContinuer.style.opacity = "0";
                 setTimeout(() => {
@@ -441,6 +529,9 @@
                         body.style.color="#FFF5DB";
                         Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 100%, #2E1D1D 100%)";
                         divScore.style.color="#FFF5DB";
+                        divScore.style.border="4px solid #FFF5DB";
+                        Infopartie.style.border="4px solid #FFF5DB";
+                        divQuetepara.style.color="#FFF5DB";
                         boutonInfo.addEventListener("mouseenter", sourisBoutonInfoEntrer, { signal });
                         boutonInfo.addEventListener("mouseleave", sourisBoutonInfoSortie, { signal });
                         boutonInfo.style.background="#FFF5DB";
@@ -465,6 +556,9 @@
                         Titre.style.transition = "ease-in-out all 0.5s";
                         Titre.style.backgroundImage = "linear-gradient(to right, #FFF5DB 0%, #2E1D1D 0%)";
                         divScore.style.color="#2E1D1D";
+                        divScore.style.border="4px solid #2E1D1D";
+                        Infopartie.style.border="4px solid #2E1D1D";
+                        divQuetepara.style.color="#2E1D1D";
                         divScore.style.transition = "ease-in-out all 0.5s";
                         boutonInfo.style.background="#2E1D1D";
                         boutonInfo.style.border="1px solid #2E1D1D";
@@ -480,7 +574,12 @@
                         },3000);
 
                 }
-                
+                Divmotsecret.style.opacity = 0;
+                setTimeout(() => {
+                        Divmotsecret.style.display = "none";
+                }, 250);
+                comptetour++;
+                Spancomptetours.textContent=comptetour;
 
 
                 }, { signal });
@@ -495,13 +594,11 @@
                         td[i+nbrligne*5].textContent=event.key.toUpperCase();
                         colonneActu ++;
                         motJoueur+=event.key;
-                        console.log(colonneActu);
                         break;
                 }
                 }
 
                 TableauMotJoueur=motJoueur.split("");
-                console.log(TableauMotJoueur);
                 for (let lettre=0; lettre<TableauMotJoueur.length; lettre++){
                 for (let autrelettre=1;autrelettre<TableauMotJoueur.length; autrelettre++ ){
                 if(TableauMotJoueur[lettre]===TableauMotJoueur[autrelettre] && lettre!=autrelettre){
@@ -532,17 +629,18 @@
                         setTimeout(() =>{
                         td[nbrligne*5].parentNode.style.left="20px";}, 100);
                         setTimeout(() =>{
-                        td[nbrligne*5].parentNode.style.left="0px";;}, 200);
+                        td[nbrligne*5].parentNode.style.left="0px";}, 200);
                 }
                 else{
                         longueur.style.opacity=0;
                         repetition.style.opacity=0;
                         colonneActu=0;
-                        console.log(motJoueur);
                         BloquerMottaper=true;
+                        let motsecret= await Recevoirmotsecret();
                         let vainqueur= await EnvoipourVainqueur(motJoueur);
                         await envoiEssai(motJoueur, nbrligne);
                         nbrligne+=1;
+                        essai.textContent=nbrligne;
                         motJoueur="";
 
                         if(nbrligne==6 || vainqueur ){
@@ -562,7 +660,13 @@
                                 afficheScore.textContent=scoreJ2;
                         }
                         }
-
+                        Spanmotsecret.textContent=motsecret;
+                        spanmotsecretfin.textContent=motsecret;
+                        Divmotsecret.style.display = "flex";
+                        document.querySelector("table").classList.add("motAffiche");
+                        setTimeout(() => {
+                                Divmotsecret.style.opacity = 1;
+                        }, 250);
                         SpanScore.textContent=Joueur1 + " : " + scoreJ1 + " | " + Joueur2 + " : " +scoreJ2;
 
 
@@ -575,6 +679,7 @@
                         document.querySelector(".temps").textContent= heures +"h " +minutes +"min " + secondes +"s";
                         document.querySelector("table").style.opacity="0";
                         divScore.style.opacity="0";
+                        Infopartie.style.opacity = "0";
 
                         
                         if(scoreJ1 > scoreJ2){
@@ -595,12 +700,15 @@
                         }
                         
                         overlay.style.display = "block";
-                        motdefin.style.display="block";
-                        
-                        setTimeout(()=>{
+                        setTimeout(() => {
                         overlay.style.opacity = "1";
-                        motdefin.style.opacity="1";
-                        }, 2000);
+                        }, 20);
+                        setTimeout(() => {
+                        motdefin.style.display = "block";
+                        setTimeout(() => {
+                                motdefin.style.opacity = "1";
+                        }, 20);
+                        }, 250);
                         }
                         else{
                         setTimeout(() => boutonContinuer.style.opacity="1", 1000);}
@@ -724,7 +832,7 @@
                 },
         };
 
-        let reponse= await fetch("/api/scorej2", options);
+        let reponse = await fetch(API_URL + "/api/scorej2", options);
         let resultat = await reponse.json();
         return resultat;
         }
@@ -739,7 +847,17 @@
 
         let reponse= await fetch(API_URL +"/api/reset", options);
         }
+        async function Recevoirmotsecret(){
+        let options={
+                method:"GET",
+                headers: {
+                        "Content-type":"application/json"
+                },
+                };
 
+                let reponse= await fetch(API_URL +"/api/motsecret", options);
+                return reponse.text();
+        }
         /*document.addEventListener('mousemove', (event) => {
                 console.log(`Position X : ${event.clientX} | Position Y : ${event.clientY}`);
         });*/

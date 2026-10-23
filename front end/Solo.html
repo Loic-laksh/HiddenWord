@@ -6,7 +6,7 @@
 <title> Mode Solo </title>
 <link rel="stylesheet" href="Solo.css">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sekuya&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 <div>
@@ -28,6 +28,7 @@
         <tr><td></td><td></td><td></td><td></td><td></td></tr>
         <tr><td></td><td></td><td></td><td></td><td></td></tr>
     </table>
+    <input type="text" id="clavierMobile" maxlength="1">
                 <div class="renseignement">
                     <div class="question">
                     <label for="nom">Quel est ton nom ?</label>
@@ -58,7 +59,39 @@
         <button class="compris" type="button"> C'est compris</button>
         
     </div>
-    <div class="score jeu"> Votre score est : <span class="spanscore"></span></div>
+    <div class="score jeu">
+
+    <div class="divScore">
+        <hr>
+        <i class="fa-solid fa-crown"></i>
+        <hr>
+    </div>
+    <p class="titreScore">Votre score :</p>
+    <span class="spanscore scoreaffiche">0</span>
+    <div class="motsecret">
+        <p>Le mot était :</p>
+        <span class="motsecretValeur"></span>
+    </div>
+
+</div>
+    
+    <div class="infopartie jeu">
+        <div class="divQuete">
+        <i class="fa-solid fa-gem"></i></i>
+        <p> Quête en cours</p>
+    </div>
+    <hr>
+    <div class="listequete">
+    <div class="ensemblequete">
+    <p class="titrequete"> Round</p>
+    <p><span class="comptetour"></span> / <span class="spantours"></span></p></div>
+    <div class="ensemblequete">
+    <p class="titrequete"> Essai</p>
+    <p><span class="essai"></span> / 6</p></div>
+    <div class="ensemblequete">
+    <p class="titrequete"> Temps</p>
+    <p><span class="tempsecoule"></span></p></div>
+</div></div>
     <button class="continuer" type="button"> Continuer</button>
     <div class="mes_infos jeu">
         <p id="mon_nom"> Réalisé par Loïc LAKSHMINARAYANAN</p>
@@ -77,8 +110,8 @@
         <p> Niveau</p>
         <p> [<span class="niveau"></span>]</p></div>
         <div>
-        <p> Nombre Round</p>
-        <p> [<span class="spantours"></span> /<span class="spantours"></span>]</p></div>
+        <p> Mot secret</p>
+        <p> [<span class="spanmotfin"></span>]</p></div>
         <div>
         <p> Score</p>
         <p> [<span class="spanscore"></span>/<span class="spantours multi"></span>]</p></div>
@@ -118,7 +151,7 @@
 
     setTimeout(()=>{
         for(let i=0; i < apparitions.children.length; i++){
-            if (!apparitions.children[i].classList.contains("jeu")) {
+            if (!apparitions.children[i].classList.contains("jeu") &&  apparitions.children[i].id !== "clavierMobile") {
                 setTimeout(()=>{
                 apparitions.children[i].style.opacity=1;}, 250 *i);}
         }
@@ -142,6 +175,7 @@
     let overlay= document.querySelector(".overlay");
     let debut;
     let td=document.querySelectorAll('td');
+    let clavierMobile = document.getElementById("clavierMobile");
     let BloquerMottaper=false;
     let colonneActu=0;
     let nbrligne=0;
@@ -149,7 +183,23 @@
     let motJoueur="";
     let controller = new AbortController();
     let { signal } = controller;
+    let secondesecoules=0;
+    let sec;
+    let min;
+    let heu;
+    let timer;
+    let essai=document.querySelector(".essai");
+    let comptetour=1;
+    let Spancomptetours=document.querySelector(".comptetour");
+    let Divmotsecret=document.querySelector(".motsecret");
+    let Spanmotsecret=document.querySelector(".motsecretValeur");
+    let spanmotsecretfin=document.querySelector(".spanmotfin");
 
+    td.forEach(caseJeu => {
+        caseJeu.addEventListener("click", () => {
+            clavierMobile.focus();
+        });
+    });
     boutonfait.addEventListener("click", ()=>{
         renseignement.style.opacity = 0;
         setTimeout(() => {
@@ -193,6 +243,7 @@
     });
 
     boutonRecommencer.addEventListener("click", ()=>{
+        
         motdefin.style.opacity = 0;
         overlay.style.opacity = 0;
         setTimeout(() => {
@@ -217,11 +268,19 @@
         }
         colonneActu=0;
         nbrligne=0;
+        document.querySelector("table").classList.remove("motAffiche");
         score =0;
+        comptetour=1;
+        clearInterval(timer);
+        secondesecoules=0;
         SpanScore.forEach(span =>{
             span.textContent=score;
 
         });
+        Divmotsecret.style.opacity = 0;
+        setTimeout(() => {
+            Divmotsecret.style.display = "none";
+        }, 250);
         motJoueur="";
         controller.abort();
         controller = new AbortController();
@@ -232,7 +291,26 @@
     });
 
     function lancerPartie(){
-
+    Spancomptetours.textContent=comptetour;
+    essai.textContent=nbrligne;
+    timer = setInterval(() => {
+        secondesecoules++;
+        sec = secondesecoules % 60;
+        min = Math.floor((secondesecoules / 60) % 60);
+        heu = Math.floor(secondesecoules / 3600);
+        if(heu==0){
+            if(min==0){
+                document.querySelector(".tempsecoule").textContent="00:"+sec;
+            }
+            else{
+                document.querySelector(".tempsecoule").textContent=min+":"+sec;
+            }
+        }
+        else{
+            document.querySelector(".tempsecoule").textContent=heu+":"+min+":"+sec;
+        }
+        
+    }, 1000);
     let jeu= document.querySelectorAll(".jeu");
 
     setTimeout(()=>{
@@ -259,7 +337,6 @@
     boutonCompris.addEventListener("click", ()=>{
         reglement.style.opacity = 0;
         overlay.style.opacity = 0;
-
         setTimeout(() => {
             reglement.style.display = "none";
             overlay.style.display = "none";
@@ -320,11 +397,13 @@
     let heures;
     
     boutonContinuer.addEventListener("click", () => {
+            secondesecoules=0;
             td.forEach(td => {
                 td.textContent = "";
                 td.style.backgroundColor = "";
             });
             nbrligne = 0;
+            document.querySelector("table").classList.remove("motAffiche");
             BloquerMottaper=false;
             boutonContinuer.style.opacity = "0";
             setTimeout(() => {
@@ -351,6 +430,12 @@
                 audio_joue=true;
         }
         }
+        Divmotsecret.style.opacity = 0;
+        setTimeout(() => {
+            Divmotsecret.style.display = "none";
+        }, 250);
+        comptetour++;
+        Spancomptetours.textContent=comptetour;
 
 
         }, { signal });
@@ -365,13 +450,11 @@
                 td[i+nbrligne*5].textContent=event.key.toUpperCase();
                 colonneActu ++;
                 motJoueur+=event.key;
-                console.log(colonneActu);
                 break;
             }
         }
 
         TableauMotJoueur=motJoueur.split("");
-        console.log(TableauMotJoueur);
         for (let lettre=0; lettre<TableauMotJoueur.length; lettre++){
         for (let autrelettre=1;autrelettre<TableauMotJoueur.length; autrelettre++ ){
             if(TableauMotJoueur[lettre]===TableauMotJoueur[autrelettre] && lettre!=autrelettre){
@@ -414,10 +497,11 @@
                 longueur.style.opacity=0;
                 repetition.style.opacity=0;
                 colonneActu=0;
-                console.log(motJoueur);
+                let motsecret= await Recevoirmotsecret();
                 let vainqueur= await EnvoipourVainqueur(motJoueur);
                 await envoiEssai(motJoueur, nbrligne);
                 nbrligne+=1;
+                essai.textContent=nbrligne;
                 motJoueur="";
 
                 if(nbrligne==6 || vainqueur ){
@@ -429,6 +513,13 @@
                     if(vainqueur){
                     score+= await RecevoirScore();
                     }
+                    Spanmotsecret.textContent=motsecret;
+                    spanmotsecretfin.textContent=motsecret;
+                    Divmotsecret.style.display = "flex";
+                    document.querySelector("table").classList.add("motAffiche");
+                    setTimeout(() => {
+                        Divmotsecret.style.opacity = 1;
+                    }, 250);
                     SpanScore.forEach(span =>{
                         span.textContent=score;
 
@@ -443,6 +534,7 @@
                     document.querySelector(".temps").textContent= heures +"h " +minutes +"min " + secondes +"s";
                     document.querySelector("table").style.opacity="0";
                     document.querySelector(".score").style.opacity="0";
+                    document.querySelector(".infopartie").style.opacity="0";
 
                     if(Unround){
                     if (score <= 2){
@@ -579,5 +671,16 @@
         return resultat;
     }
     
+        async function Recevoirmotsecret(){
+        let options={
+            method:"GET",
+            headers: {
+                "Content-type":"application/json"
+            },
+        };
+
+        let reponse= await fetch(API_URL +"/api/motsecret", options);
+        return reponse.text();
+    }
 
 </script>

@@ -86,5 +86,9 @@ public class GameController {
     public void reset() {
         partie.resetScore();
     }
+                @GetMapping("/api/motsecret")
+    public String motsecret() {
+        return partie.getMotSecret();
+    }
 }
 

@@ -95,11 +95,11 @@ public class Game {
 		return this.listeDesTentatives[i];
 	}
 
-	public Word getMotSecret () {
+	public String getMotSecret () {
 		/*
-            Retourne le mot secret de type Word.
+            Retourne le mot secret de type String.
         */
-		return this.motSecret;
+		return this.motSecret.getMot();
 	}
 
 	public int getTentative () {
