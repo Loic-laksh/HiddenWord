@@ -1,3 +1,7 @@
+html{
+    overflow-x: hidden;
+}
+
 body{
     background-color: #FFF5DB;
     font-size: 18px;
@@ -934,6 +938,246 @@ tr{
 
     #Logo{
         width: 65%;
+        height: auto;
+    }
+
+}
+
+/* Pour les petits PC / laptops */
+@media screen and (min-width: 769px) and (max-width: 1366px) {
+
+    #Titre{
+        font-size: 32px;
+        letter-spacing: 2px;
+        padding-bottom: 4vh;
+    }
+
+    table{
+        transform: scale(0.85);
+    }
+
+    td{
+        font-size: 27px;
+    }
+
+    .score{
+        transform: scale(0.75);
+        top: 15%;
+        left: 0%;
+    }
+
+    .infopartie{
+        transform: scale(0.75);
+        top: 15%;
+        left: 72%;
+    }
+
+    .continuer{
+        top: 86%;
+        right: 4%;
+    }
+
+    .regles{
+        width: 45%;
+        font-size: 16px;
+    }
+
+    .motdefin{
+        width: 38%;
+        height: 65%;
+    }
+
+    #J1,
+    #J2{
+        font-size: 46px;
+    }
+
+    #Logo{
+        width: 28%;
+        height: auto;
+    }
+
+}
+
+
+/* Pour les tablettes */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+
+    body{
+        overflow-x: hidden;
+    }
+
+    #Titre{
+        transform: none;
+        font-size: 28px;
+        line-height: 1.15;
+        letter-spacing: 2px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 5%;
+    }
+
+    td{
+        font-size: 27px;
+    }
+
+    table{
+        transform: scale(0.9);
+        position: absolute;
+        top: 34%;
+        width: 100%;
+    }
+
+    .motAffiche{
+        top: 43%;
+    }
+
+    .score{
+        transform: scale(0.7);
+        top: 12%;
+        left: 1%;
+    }
+
+    .infopartie{
+        transform: scale(0.7);
+        top: 12%;
+        left: 48%;
+    }
+
+    .listequete{
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .ensemblequete{
+        min-width: 85px;
+    }
+
+    .infopartie hr{
+        width: 100%;
+    }
+
+    .scoreaffiche{
+        font-size: 30px;
+        transform: scale(0.9) scaleY(1.4);
+    }
+
+    .motsecret{
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .motsecretValeur{
+        font-size: 25px;
+        padding: 12px 10px;
+    }
+
+    .continuer{
+        top: 90%;
+        right: 5%;
+    }
+
+    .regles{
+        width: 70%;
+        font-size: 15px;
+        padding: 4%;
+    }
+
+    .compris{
+        font-size: 12px;
+    }
+
+    .motdefin{
+        width: 70%;
+        height: auto;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .renseignement{
+        width: 80%;
+        font-size: 16px;
+    }
+
+    .mes_infos{
+        width: 97%;
+    }
+
+    #mon_nom{
+        font-size: 9px;
+    }
+
+    #info{
+        font-size: 20px;
+        padding: 6px 14px;
+    }
+
+    #J1,
+    #J2{
+        font-size: 35px;
+    }
+
+    #Logo{
+        width: 50%;
+        height: auto;
+    }
+
+}
+
+/* Pour les très grands écrans */
+@media screen and (min-width: 1921px) {
+
+    #Titre{
+        font-size: 44px;
+        letter-spacing: 4px;
+        padding-bottom: 6vh;
+    }
+
+    table{
+        transform: scale(1.1);
+    }
+
+    td{
+        font-size: 32px;
+    }
+
+    .score{
+        transform: scale(1.1);
+        top: 17%;
+        left: 11%;
+    }
+
+    .infopartie{
+        transform: scale(1.1);
+        top: 17%;
+        left: 72%;
+    }
+
+    .continuer{
+        top: 82%;
+        right: 5%;
+    }
+
+    .regles{
+        width: 30%;
+        font-size: 19px;
+    }
+
+    .motdefin{
+        width: 27%;
+        height: 62%;
+    }
+
+    #J1,
+    #J2{
+        font-size: 68px;
+    }
+
+    #Logo{
+        width: 32%;
         height: auto;
     }
 
