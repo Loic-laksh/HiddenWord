@@ -200,6 +200,7 @@
             clavierMobile.focus();
         });
     });
+
     boutonfait.addEventListener("click", ()=>{
         renseignement.style.opacity = 0;
         setTimeout(() => {
@@ -440,16 +441,15 @@
 
         }, { signal });
 
-
-    window.addEventListener('keyup', async (event)=>{
-        if(/^[a-zA-Z]$/.test(event.key) && tours!=0 && !BloquerMottaper){
+    async function cliquertouche(touche){
+        if(/^[a-zA-Z]$/.test(touche) && tours!=0 && !BloquerMottaper){
         for(let i=0; i < 5;i++){
             testRepetition=true;
             longueur.style.opacity=0;
             if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
-                td[i+nbrligne*5].textContent=event.key.toUpperCase();
+                td[i+nbrligne*5].textContent=touche.toUpperCase();
                 colonneActu ++;
-                motJoueur+=event.key;
+                motJoueur+=touche;
                 break;
             }
         }
@@ -468,7 +468,7 @@
     }
 
 
-        else if (event.key==="Enter"  && tours!=0 && !BloquerMottaper){
+        else if (touche==="Enter"  && tours!=0 && !BloquerMottaper){
             if(colonneActu<5){
                 longueur.style.opacity=1;
 
@@ -589,7 +589,7 @@
         }
             return ;
         }
-        if(event.key==="Backspace"  && tours!=0 && !BloquerMottaper){
+        if(touche==="Backspace"  && tours!=0 && !BloquerMottaper){
             for(let i=4; i>=0; i--){
                 if(td[i+nbrligne*5].textContent.length==1){
                     td[i+nbrligne*5].textContent="";
@@ -600,6 +600,14 @@
             }
             }
         }
+    }
+    window.addEventListener("keyup", (event) => {
+        cliquertouche(event.key);
+    }, { signal });
+    
+    clavierMobile.addEventListener("input", () => {
+        cliquertouche(clavierMobile.value);
+        clavierMobile.value = "";
     }, { signal });
     }
 
