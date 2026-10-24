@@ -449,7 +449,7 @@
             if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
                 td[i+nbrligne*5].textContent=touche.toUpperCase();
                 colonneActu ++;
-                motJoueur+=motJoueur += touche.toLowerCase();
+                motJoueur+=toucheto.LowerCase();;
                 break;
             }
         }
@@ -602,7 +602,9 @@
         }
     }
     window.addEventListener("keyup", (event) => {
-        cliquertouche(event.key);
+        if (document.activeElement != clavierMobile) {
+            cliquertouche(event.key);
+    }
     }, { signal });
 
     clavierMobile.addEventListener("input", () => {
@@ -663,7 +665,6 @@
 
         let reponse= await fetch(API_URL +"/api/verifier", options);
         let resultat = await reponse.json();
-
         placement(resultat, nbrligne);
     }
 
