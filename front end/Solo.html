@@ -604,7 +604,7 @@
     window.addEventListener("keyup", (event) => {
         cliquertouche(event.key);
     }, { signal });
-    
+
     clavierMobile.addEventListener("input", () => {
         cliquertouche(clavierMobile.value);
         clavierMobile.value = "";
@@ -663,6 +663,7 @@
 
         let reponse= await fetch(API_URL +"/api/verifier", options);
         let resultat = await reponse.json();
+            alert(JSON.stringify(resultat));
         placement(resultat, nbrligne);
     }
 
