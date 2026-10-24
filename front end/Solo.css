@@ -100,6 +100,7 @@ body{
     animation-delay: 3s;
     animation-iteration-count: infinite;
     transition:  ease-in-out all 0.5s;
+
 }
 
 #repetition{
@@ -117,6 +118,7 @@ body{
     left: 0;
     display: none;
     transition:  ease-in-out all 0.25s;
+    z-index: 112;
 
 }
 @keyframes regles{
@@ -139,7 +141,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 100;
+    z-index: 120;
     padding: 2%;
     width: 30%;
     background-color: #e4dfd2;
