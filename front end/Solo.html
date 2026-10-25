@@ -449,7 +449,7 @@
             if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
                 td[i+nbrligne*5].textContent=touche.toUpperCase();
                 colonneActu ++;
-                motJoueur+=touche;
+                motJoueur+= touche.toLowerCase();
                 break;
             }
         }
@@ -503,6 +503,7 @@
                 nbrligne+=1;
                 essai.textContent=nbrligne;
                 motJoueur="";
+                clavierMobile.value = "";
 
                 if(nbrligne==6 || vainqueur ){
                     BloquerMottaper=true;
@@ -601,55 +602,56 @@
             }
         }
     }
-    window.addEventListener("keyup", (event) => {
+window.addEventListener("keyup", (event) => {
 
-        if(document.activeElement !== clavierMobile){
-            cliquertouche(event.key);
+    if(document.activeElement !== clavierMobile){
+        cliquertouche(event.key);
+    }
+
+    else if(event.key === "Enter"){
+        cliquertouche("Enter");
+    }
+
+}, { signal });
+
+
+clavierMobile.addEventListener("input", () => {
+
+    motJoueur = clavierMobile.value.toLowerCase();
+    colonneActu = motJoueur.length;
+
+    longueur.style.opacity = 0;
+    repetition.style.opacity = 0;
+
+    for(let i = 0; i < 5; i++){
+
+        td[i + nbrligne * 5].textContent = "";
+
+        if(i < motJoueur.length){
+            td[i + nbrligne * 5].textContent =
+                motJoueur[i].toUpperCase();
         }
+    }
 
-        else if(event.key === "Enter"){
-            cliquertouche("Enter");
-        }
+    testRepetition = true;
+    TableauMotJoueur = motJoueur.split("");
 
-    }, { signal });
+    for(let lettre = 0; lettre < TableauMotJoueur.length; lettre++){
 
+        for(let autrelettre = 1; autrelettre < TableauMotJoueur.length; autrelettre++){
 
-    clavierMobile.addEventListener("input", () => {
-
-        motJoueur = clavierMobile.value.toLowerCase();
-        colonneActu = motJoueur.length;
-
-        longueur.style.opacity = 0;
-        repetition.style.opacity = 0;
-
-        for(let i = 0; i < 5; i++){
-
-            td[i + nbrligne * 5].textContent = "";
-
-            if(i < motJoueur.length){
-                td[i + nbrligne * 5].textContent =
-                    motJoueur[i].toUpperCase();
+            if(
+                TableauMotJoueur[lettre] === TableauMotJoueur[autrelettre]
+                && lettre != autrelettre
+            ){
+                testRepetition = false;
+                break;
             }
         }
+    }
 
-        testRepetition = true;
-        TableauMotJoueur = motJoueur.split("");
-
-        for(let lettre = 0; lettre < TableauMotJoueur.length; lettre++){
-
-            for(let autrelettre = 1; autrelettre < TableauMotJoueur.length; autrelettre++){
-
-                if(
-                    TableauMotJoueur[lettre] === TableauMotJoueur[autrelettre]
-                    && lettre != autrelettre
-                ){
-                    testRepetition = false;
-                    break;
-                }
-            }
-        }
-
-    }, { signal });
+}, { signal });
+    }
 
     function placement(tableauEssai, nbrligne){
         let td=document.querySelectorAll('td');
