@@ -449,7 +449,7 @@
             if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
                 td[i+nbrligne*5].textContent=touche.toUpperCase();
                 colonneActu ++;
-                motJoueur+=touche.toLowerCase();
+                motJoueur+=touche;
                 break;
             }
         }
@@ -602,16 +602,54 @@
         }
     }
     window.addEventListener("keyup", (event) => {
-        if (document.activeElement != clavierMobile) {
+
+        if(document.activeElement !== clavierMobile){
             cliquertouche(event.key);
-    }
+        }
+
+        else if(event.key === "Enter"){
+            cliquertouche("Enter");
+        }
+
     }, { signal });
 
+
     clavierMobile.addEventListener("input", () => {
-        cliquertouche(clavierMobile.value);
-        clavierMobile.value = "";
+
+        motJoueur = clavierMobile.value.toLowerCase();
+        colonneActu = motJoueur.length;
+
+        longueur.style.opacity = 0;
+        repetition.style.opacity = 0;
+
+        for(let i = 0; i < 5; i++){
+
+            td[i + nbrligne * 5].textContent = "";
+
+            if(i < motJoueur.length){
+                td[i + nbrligne * 5].textContent =
+                    motJoueur[i].toUpperCase();
+            }
+        }
+
+        testRepetition = true;
+        TableauMotJoueur = motJoueur.split("");
+
+        for(let lettre = 0; lettre < TableauMotJoueur.length; lettre++){
+
+            for(let autrelettre = 1; autrelettre < TableauMotJoueur.length; autrelettre++){
+
+                if(
+                    TableauMotJoueur[lettre] === TableauMotJoueur[autrelettre]
+                    && lettre != autrelettre
+                ){
+                    testRepetition = false;
+                    break;
+                }
+            }
+        }
+
     }, { signal });
-    }
 
     function placement(tableauEssai, nbrligne){
         let td=document.querySelectorAll('td');
