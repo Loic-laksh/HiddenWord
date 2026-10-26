@@ -738,7 +738,7 @@
         }
         window.addEventListener("keyup", (event) => {
 
-        if(document.activeElement !== clavierMobile){
+        if(event.target !== clavierMobile){
                 cliquertouche(event.key);
         }
 
