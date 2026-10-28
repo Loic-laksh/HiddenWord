@@ -145,7 +145,7 @@
 </div>
 
 <div class="regleMot" id="longueur"> Le mot doit faire 5 lettres</div>
-<div class="regleMot" id="repetition"> le mot ne doit pas contenir de lettre répétée</div>
+<div class="regleMot" id="existe"> le mot n'existe pas</div>
         <audio muted>
         <source src="audio_tour.m4a" >
 </audio>
@@ -469,7 +469,7 @@
 
 
         let longueur=document.getElementById("longueur");
-        let repetition=document.getElementById("repetition");
+        let divexisteerreur=document.getElementById("existe");
 
 
         let boutonContinuer=document.querySelector(".continuer");
@@ -611,10 +611,21 @@
                         td[nbrligne*5].parentNode.style.left="0px";;}, 200);
 
                 }
-                
+                let existe = await Motexiste(motJoueur);
+
+                if (!existe) {
+                        divexisteerreur.style.opacity=1;
+
+                        td[nbrligne*5].parentNode.style.left="-20px";
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="20px";}, 100);
+                        setTimeout(() =>{
+                        td[nbrligne*5].parentNode.style.left="0px";
+                }, 200);
+                }
                 else{
                         longueur.style.opacity=0;
-                        repetition.style.opacity=0;
+                        divexisteerreur.style.opacity=0;
                         colonneActu=0;
                         BloquerMottaper=true;
                         let motsecret= await Recevoirmotsecret();
@@ -736,7 +747,7 @@
         colonneActu = motJoueur.length;
 
         longueur.style.opacity = 0;
-        repetition.style.opacity = 0;
+        divexisteerreur.style.opacity = 0;
 
         for(let i = 0; i < 5; i++){
 
@@ -872,6 +883,19 @@
 
                 let reponse= await fetch(API_URL +"/api/motsecret", options);
                 return reponse.text();
+        }
+
+        async function Motexiste(mot) {
+        let options = {
+                method: "POST",
+                headers: {
+                "Content-type": "application/json"
+                },
+                body: JSON.stringify({essai: mot})
+                };
+
+                let reponse = await fetch(API_URL + "/api/existe", options);
+                return await reponse.json();
         }
         /*document.addEventListener('mousemove', (event) => {
                 console.log(`Position X : ${event.clientX} | Position Y : ${event.clientY}`);

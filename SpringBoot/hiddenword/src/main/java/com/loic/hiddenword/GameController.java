@@ -90,5 +90,10 @@ public class GameController {
     public String motsecret() {
         return partie.getMotSecret();
     }
+            @PostMapping("/api/existe")
+    public boolean existe(@RequestBody Map<String, String> body) {
+        return partie.motExiste(body.get("essai"));
+    }
+
 }
 

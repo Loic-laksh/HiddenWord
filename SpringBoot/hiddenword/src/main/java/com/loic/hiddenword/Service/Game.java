@@ -208,13 +208,21 @@ public class Game {
 		this.tentative=0;
 		compteTour+=1;
 	}
-	public boolean saisieTentative (String motSaisie, int nbTour ) throws Exception{
 
-		if (this.motSecret.motValide(motSaisie)){
-			if ( ((tentative%6)==0) && compteTour!=nbTour && tentative!=0){
+	public boolean motExiste(String mot) {
+    	return this.motSecret.motExistant(mot);
+	}
+
+	public boolean saisieTentative(String motSaisie, int nbTour) throws Exception {
+
+
+		if (this.motSecret.motValide(motSaisie)) {
+
+			if (((tentative % 6) == 0) && compteTour != nbTour && tentative != 0) {
 				reset();
 			}
-			else if (compteTour==nbTour){
+
+			else if (compteTour == nbTour) {
 				return false;
 			}
 			listeDesTentatives[tentative] = motSaisie;
@@ -222,12 +230,13 @@ public class Game {
 			vainqueur(motSaisie);
 			return true;
 		}
+
 		return false;
 	}
 
 	public boolean vainqueur (String mot){
 		/*
-            Permet de vérifier si le mot passé en paramètre est le même que le mot secret. 
+            Permet de vérifier si le mot passé en paramètre est le même que le mot secret.
 			Si c’est le cas, les points sont attribués en fonction du nombre de tentatives et la méthode renvoie TRUE sinon, elle renvoie FALSE.
         */
 		if(this.motSecret.getMot().equals(mot)){

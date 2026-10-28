@@ -1,28 +1,38 @@
 package com.loic.hiddenword.donnees;
 import  java.util.HashMap;
 import java.util.Map;
+
+import words.WordSet;
+import words.JsonWordSet;
 public class Word {
 
 /* L' attribut */
-	 
+
 	private String mot;
-	
+	private static WordSet listeMotsValide;
 /* Les constructeurs */
 
 	public Word(String mot) throws Exception {
 		/*
             Permet d’initialiser la variable d’instance grâce à un mot (String).
         */
-	    this.mot = mot;
+		if (listeMotsValide == null) {
+			listeMotsValide = new JsonWordSet("motAcceptable.json");
+		}
+
+		this.mot = mot;
 	}
 
 	public Word() throws Exception {
-		/*
-            Permet d’initialiser la variable grâce au constructeur vide.
-        */
-	    this.mot = "faire";
+			/*
+				Permet d’initialiser la variable grâce au constructeur vide.
+			*/
+		if (listeMotsValide == null) {
+			listeMotsValide = new JsonWordSet("motAcceptable.json");
+		}
+
+		this.mot = "faire";
 	}
-	
 /* Accesseurs et Mutateurs */
 
 	public String getMot(){
@@ -102,14 +112,26 @@ public class Word {
 		return true;
 	}
 	
-	
+	public boolean motExistant(String mot) {
+		/*
+			Retourne un booléen en fonction du mot mis en paramètre
+			et du fait qu’il existe ou non.
+		*/
+
+		for (int i = 0; i < this.listeMotsValide.size(); i++) {
+			if (this.listeMotsValide.word(i).equals(mot)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	public boolean motValide (String mot){
 		/*
             Retourne un booléen en fonction du mot mis en paramètre et de sa validité selon les règles du jeu.
         */
-		if (mot.length()==5  && uniquementLettre(mot)  ){
+		if (mot.length()==5  && uniquementLettre(mot) && motExistant(mot) ){
 			return true;
 		}
 		erreurMot(mot);
@@ -131,6 +153,10 @@ public class Word {
 	
 		else if (!uniquementLettre(mot)){
 			System.out.println("Erreur : le mot doit contenir uniquement des lettres. ");
+			}
+
+		else if (!motExistant(mot)){
+			System.out.println("Erreur : le mot n'existe pas. ");
 			}
 	}
 	

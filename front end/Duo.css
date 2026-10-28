@@ -151,7 +151,7 @@ tr{
     transition:  ease-in-out all 0.5s;
 }
 
-#repetition{
+#existe{
     padding-top: 0;
 }
 
@@ -923,7 +923,7 @@ tr{
         top: 84%;
     }
 
-    #repetition{
+    #existe{
         top: 87%;
         padding-top: 0;
     }
