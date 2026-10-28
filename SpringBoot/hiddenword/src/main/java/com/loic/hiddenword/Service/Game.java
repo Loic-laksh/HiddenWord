@@ -1,4 +1,7 @@
 package com.loic.hiddenword.Service;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.loic.hiddenword.donnees.Joueur;
@@ -238,18 +241,33 @@ public class Game {
         Va créer un tableau contenant les réponses associées à la tentative, puis le renvoyer. Exemple : {"OK", "ABSENT", "OK", "PRÉSENT", "ABSENT"}.
         */
 		String[] reponse = new String[5];
+		
 		if (saisieTentative( motSaisie, nbTour)){
+			Map<Character, Integer> repetition= this.motSecret.occurrenceLettre();
 				for (int j=0; j < listeDesTentatives[this.tentative - 1].length(); j++){
 					if (this.motSecret.contientLettre (listeDesTentatives[this.tentative - 1].charAt(j))){
 						if (this.motSecret.memeLettre (listeDesTentatives[this.tentative - 1].charAt(j), j)){
 							reponse[j] = TENTATIVELISTE[0];
-						}else{
-							reponse[j] = TENTATIVELISTE[1];
+							int valeur=repetition.get(listeDesTentatives[this.tentative - 1].charAt(j));
+							if(valeur>=1){
+								valeur-=1;
+								repetition.put(listeDesTentatives[this.tentative - 1].charAt(j), valeur);}
 						}
-					}else{
-						reponse[j] = TENTATIVELISTE[2];
 					}
 			}
+				for (int j = 0; j < listeDesTentatives[this.tentative - 1].length(); j++) {
+					if (reponse[j] == null) {
+						if (repetition.containsKey(listeDesTentatives[this.tentative - 1].charAt(j)) && repetition.get(listeDesTentatives[this.tentative - 1].charAt(j)) > 0) {
+							reponse[j] = TENTATIVELISTE[1];
+							int valeur = repetition.get(listeDesTentatives[this.tentative - 1].charAt(j));
+							valeur -= 1;
+							repetition.put(listeDesTentatives[this.tentative - 1].charAt(j), valeur);
+						}
+						else {
+							reponse[j] = TENTATIVELISTE[2];
+						}
+					}
+				}
 		}
 		if(vainqueur(motSaisie)==true){
 			this.point = 7 - tentative;

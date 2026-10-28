@@ -1,4 +1,6 @@
 package com.loic.hiddenword.donnees;
+import  java.util.HashMap;
+import java.util.Map;
 public class Word {
 
 /* L' attribut */
@@ -72,7 +74,19 @@ public class Word {
 	}
 
 
-	
+	public Map<Character, Integer> occurrenceLettre (){
+		Map<Character, Integer> repetition= new HashMap<>();
+		for (int i = 0; i <this.mot.length(); i++){
+        	if (!repetition.containsKey(this.mot.charAt(i))) {
+				repetition.put(this.mot.charAt(i), 1);
+			} else {
+				int valeur=repetition.get(this.mot.charAt(i))+1;
+				repetition.put(this.mot.charAt(i), valeur);
+			}
+		}
+		return repetition;
+
+	}
 	
 	public boolean uniquementLettre(String mot) {
 		/*
