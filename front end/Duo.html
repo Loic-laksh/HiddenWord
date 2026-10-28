@@ -196,6 +196,7 @@
         let scoreJ1 =0;
         let scoreJ2 =0;
         let motJoueur="";
+        let idpartie;
         let controller = new AbortController();
         let { signal } = controller;
         let divj1= document.getElementById("J1");
@@ -811,32 +812,42 @@
 
                 let reponse= await fetch(API_URL +"/api/renseignementmulti", options);
                 let resultat = await reponse.json();
+                idpartie = resultat.idpartie;
+                console.log("ID PARTIE :", idpartie);
         }
-                async function EnvoipourVainqueur(mot){
-                let options={
+        
+        async function EnvoipourVainqueur(mot){
+        let options={
                 method:"POST",
                 headers: {
-                        "Content-type":"application/json"
+                "Content-type":"application/json"
                 },
-                body: JSON.stringify({essai:mot})
-                };
+                body: JSON.stringify({
+                essai: mot,
+                idpartie: String(idpartie)
+                })
+        };
 
-                let reponse= await fetch(API_URL +"/api/vainqueur", options);
-                let resultat = await reponse.json();
-                return resultat;
+        let reponse= await fetch(API_URL +"/api/vainqueur", options);
+        let resultat = await reponse.json();
+        return resultat;
         }
+
         async function envoiEssai(mot, nbrligne){
-                let options={
+        let options={
                 method:"POST",
                 headers: {
-                        "Content-type":"application/json"
+                "Content-type":"application/json"
                 },
-                body: JSON.stringify({essai:mot})
-                };
+                body: JSON.stringify({
+                essai: mot,
+                idpartie: String(idpartie)
+                })
+        };
 
-                let reponse= await fetch(API_URL +"/api/verifier", options);
-                let resultat = await reponse.json();
-                placement(resultat, nbrligne);
+        let reponse= await fetch(API_URL +"/api/verifier", options);
+        let resultat = await reponse.json();
+        placement(resultat, nbrligne);
         }
 
         async function RecevoirScoreJoueur1(){
@@ -847,7 +858,7 @@
                 },
         };
 
-        let reponse= await fetch(API_URL +"/api/scorej1", options);
+        let reponse= await fetch(API_URL +"/api/scorej1?idpartie=" + idpartie , options);
         let resultat = await reponse.json();
         return resultat;
         }
@@ -859,7 +870,7 @@
                 },
         };
 
-        let reponse = await fetch(API_URL + "/api/scorej2", options);
+        let reponse = await fetch(API_URL + "/api/scorej2?idpartie=" + idpartie , options);
         let resultat = await reponse.json();
         return resultat;
         }
@@ -872,7 +883,7 @@
                 },
         };
 
-        let reponse= await fetch(API_URL +"/api/reset", options);
+        let reponse= await fetch(API_URL + "/api/reset?idpartie=" + idpartie , options);
         }
         async function Recevoirmotsecret(){
         let options={
@@ -882,7 +893,7 @@
                 },
                 };
 
-                let reponse= await fetch(API_URL +"/api/motsecret", options);
+                let reponse= await fetch(API_URL +"/api/motsecret?idpartie=" + idpartie , options);
                 return reponse.text();
         }
 
@@ -892,11 +903,14 @@
                 headers: {
                 "Content-type": "application/json"
                 },
-                body: JSON.stringify({essai: mot})
-                };
+                body: JSON.stringify({
+                essai: mot,
+                idpartie: String(idpartie)
+                })
+        };
 
-                let reponse = await fetch(API_URL + "/api/existe", options);
-                return await reponse.json();
+        let reponse = await fetch(API_URL + "/api/existe", options);
+        return await reponse.json();
         }
         /*document.addEventListener('mousemove', (event) => {
                 console.log(`Position X : ${event.clientX} | Position Y : ${event.clientY}`);

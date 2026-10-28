@@ -181,6 +181,7 @@
     let nbrligne=0;
     let score =0;
     let motJoueur="";
+    let idpartie;
     let controller = new AbortController();
     let { signal } = controller;
     let secondesecoules=0;
@@ -653,34 +654,43 @@ clavierMobile.addEventListener("input", () => {
 
         let reponse= await fetch(API_URL +"/api/renseignement", options);
         let resultat = await reponse.json();
+        idpartie = resultat.idpartie;
+        console.log("ID PARTIE :", idpartie);
     }
-        async function EnvoipourVainqueur(mot){
+
+    async function EnvoipourVainqueur(mot){
         let options={
             method:"POST",
             headers: {
                 "Content-type":"application/json"
             },
-            body: JSON.stringify({essai:mot})
+            body: JSON.stringify({
+                essai: mot,
+                idpartie: String(idpartie)
+            })
         };
 
         let reponse= await fetch(API_URL +"/api/vainqueur", options);
         let resultat = await reponse.json();
         return resultat;
     }
-    async function envoiEssai(mot, nbrligne){
-        let options={
-            method:"POST",
-            headers: {
-                "Content-type":"application/json"
-            },
-            body: JSON.stringify({essai:mot})
-        };
 
-        let reponse= await fetch(API_URL +"/api/verifier", options);
-        let resultat = await reponse.json();
-        placement(resultat, nbrligne);
-    }
+        async function envoiEssai(mot, nbrligne){
+            let options={
+                method:"POST",
+                headers: {
+                    "Content-type":"application/json"
+                },
+                body: JSON.stringify({
+                    essai: mot,
+                    idpartie: String(idpartie)
+                })
+            };
 
+            let reponse= await fetch(API_URL +"/api/verifier", options);
+            let resultat = await reponse.json();
+            placement(resultat, nbrligne);
+        }
         async function RecevoirScore(){
         let options={
             method:"GET",
@@ -689,29 +699,34 @@ clavierMobile.addEventListener("input", () => {
             },
         };
 
-        let reponse= await fetch(API_URL +"/api/score", options);
+        let reponse= await fetch(API_URL + "/api/score?idpartie=" + idpartie, options);
         let resultat = await reponse.json();
         return resultat;
     }
     
         async function Recevoirmotsecret(){
-        let options={
-            method:"GET",
-            headers: {
-                "Content-type":"application/json"
-            },
-        };
+            let options={
+                method:"GET",
+                headers: {
+                    "Content-type":"application/json"
+                },
+            };
 
-        let reponse= await fetch(API_URL +"/api/motsecret", options);
-        return reponse.text();
-    }
+            let reponse= await fetch(
+                API_URL + "/api/motsecret?idpartie=" + idpartie, options);
+
+            return reponse.text();
+        }
     async function Motexiste(mot) {
         let options = {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
             },
-            body: JSON.stringify({essai: mot})
+            body: JSON.stringify({
+                essai: mot,
+                idpartie: String(idpartie)
+            })
         };
 
         let reponse = await fetch(API_URL + "/api/existe", options);

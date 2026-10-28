@@ -1,13 +1,10 @@
 package com.loic.hiddenword.Service;
-import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import com.loic.hiddenword.donnees.Joueur;
 import com.loic.hiddenword.Repo.WordRepository;
 import com.loic.hiddenword.donnees.Word;
-@Service
+
+
 public class Game {
 
 /* Les attributs */
@@ -23,14 +20,14 @@ public class Game {
 	private Joueur Player;
 	private Joueur Player2;
 	private boolean multi = false;
-
-	@Autowired
-	WordRepository wordRepository;
+	private WordRepository wordRepository;
 
 
 
 /* Les constructeurs */
-
+	public Game(WordRepository wordRepository) {
+		this.wordRepository = wordRepository;
+	}
     public void LancementPartie(String joueur, int nbTour)  throws Exception {
 		/*
         	Permet d’initialiser la variable d’instance grâce au nom (String) du joueur et à son nombre de tours (int).
