@@ -43,7 +43,6 @@
     <div class="regles jeu"><p>Les Règles du jeu FindMyWord sont simples,<br>
 
         Mon programme choisit un mot secret de 5 lettres que vous devez deviner.<br>
-        On considère qu’une lettre apparaît au maximum une seule fois dans le mot,<br>
 
         À chaque tour, vous devez proposer un mot.<br>
         Mon programme va alors analyser cette proposition et indiquer, pour chaque lettre :
@@ -55,7 +54,7 @@
 
         Si t'as toujours pas capté,<br>
 
-        Le mot secret contient exactement 5 lettres et contient aucune lettre répétée.</p>
+        Le mot secret contient exactement 5 lettres.</p>
         <button class="compris" type="button"> C'est compris</button>
         
     </div>
@@ -388,8 +387,7 @@
 
     let longueur=document.getElementById("longueur");
     let repetition=document.getElementById("repetition");
-    let testRepetition= true;
-    let TableauMotJoueur;
+//    let testRepetition= true;
     let boutonContinuer=document.querySelector(".continuer");
     let temps;
     let fin;
@@ -444,7 +442,6 @@
     async function cliquertouche(touche){
         if(/^[a-zA-Z]$/.test(touche) && tours!=0 && !BloquerMottaper){
         for(let i=0; i < 5;i++){
-            testRepetition=true;
             longueur.style.opacity=0;
             if(td[i+nbrligne*5].textContent.length==0 && colonneActu<5){
                 td[i+nbrligne*5].textContent=touche.toUpperCase();
@@ -454,16 +451,6 @@
             }
         }
 
-        TableauMotJoueur=motJoueur.split("");
-        for (let lettre=0; lettre<TableauMotJoueur.length; lettre++){
-        for (let autrelettre=1;autrelettre<TableauMotJoueur.length; autrelettre++ ){
-            if(TableauMotJoueur[lettre]===TableauMotJoueur[autrelettre] && lettre!=autrelettre){
-                testRepetition=false;
-                break ;
-            }
-        }
-
-        }
 
     }
 
@@ -481,16 +468,16 @@
             
             }
             
-            else if (testRepetition==false){
-                repetition.style.opacity=1;
-
-                td[nbrligne*5].parentNode.style.left="-20px";
-                setTimeout(() =>{
-                td[nbrligne*5].parentNode.style.left="20px";}, 100);
-                setTimeout(() =>{
-                td[nbrligne*5].parentNode.style.left="0px";
-            }, 200);
-            }
+ //           else if (testRepetition==false){
+   //             repetition.style.opacity=1;
+//
+    //            td[nbrligne*5].parentNode.style.left="-20px";
+ //               setTimeout(() =>{
+  //              td[nbrligne*5].parentNode.style.left="20px";}, 100);
+  //              setTimeout(() =>{
+  //              td[nbrligne*5].parentNode.style.left="0px";
+  //          }, 200);
+//            }
             else{
                 td[nbrligne*5].parentNode.style.left="0px";
                 
@@ -633,22 +620,7 @@ clavierMobile.addEventListener("input", () => {
         }
     }
 
-    testRepetition = true;
-    TableauMotJoueur = motJoueur.split("");
 
-    for(let lettre = 0; lettre < TableauMotJoueur.length; lettre++){
-
-        for(let autrelettre = 1; autrelettre < TableauMotJoueur.length; autrelettre++){
-
-            if(
-                TableauMotJoueur[lettre] === TableauMotJoueur[autrelettre]
-                && lettre != autrelettre
-            ){
-                testRepetition = false;
-                break;
-            }
-        }
-    }
 
 }, { signal });
     }
@@ -664,7 +636,7 @@ clavierMobile.addEventListener("input", () => {
                 td[index+nbrligne*5].style.backgroundColor="#ffef16";
             }
 
-            else {
+            else if(tableauEssai[index] === "OK     "){
                 td[index+nbrligne*5].style.backgroundColor="rgb(123, 190, 35)";
             }
         }

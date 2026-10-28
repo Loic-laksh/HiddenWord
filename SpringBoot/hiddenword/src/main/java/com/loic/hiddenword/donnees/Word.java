@@ -71,20 +71,7 @@ public class Word {
 		return false;
 	}
 
-	public boolean repetitionLettre (String mot){
-		/*
-            Retourne un booléen en fonction du mot mis en paramètre et de la présence de lettres en double dans le mot.
-        */
-		for (int i = 0; i < mot.length(); i++){
-			for (int j = i + 1; j < mot.length(); j++){
-				if (mot.charAt(i) == mot.charAt(j)){
-					return false;
-				}
-			}
-		}
-		
-		return true;
-	}
+
 	
 	
 	public boolean uniquementLettre(String mot) {
@@ -108,7 +95,7 @@ public class Word {
 		/*
             Retourne un booléen en fonction du mot mis en paramètre et de sa validité selon les règles du jeu.
         */
-		if (mot.length()==5 && repetitionLettre(mot) && uniquementLettre(mot)  ){
+		if (mot.length()==5  && uniquementLettre(mot)  ){
 			return true;
 		}
 		erreurMot(mot);
@@ -126,9 +113,7 @@ public class Word {
 			System.out.println("Erreur : le mot doit contenir exactement 5 lettres. ");
 			}
 	
-		else if(!repetitionLettre(mot)){
-			System.out.println("Erreur : le mot ne doit pas contenir de lettre répétée. ");
-			}
+
 	
 		else if (!uniquementLettre(mot)){
 			System.out.println("Erreur : le mot doit contenir uniquement des lettres. ");
